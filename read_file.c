@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/21 16:44:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/03/12 19:35:13 by pgernez          ###   ########.fr       */
+/*   Created: 2017/03/12 19:30:31 by pgernez           #+#    #+#             */
+/*   Updated: 2017/03/12 19:34:51 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	manage_arg(int argc, char **argv)
+int	read_file(char **argv)
 {
-	if (argc == 1)
-		ft_putstr("File name missing.\n");
-	if (argc > 2)
-		ft_putstr("Too many arguments.\n");
-	else
-		read_file(argv);
-	return (0);
-}
+	int		fd;
+	int		ret;
+	char	buf[BUF_SIZE + 1];
 
-int	main(int argc, char **argv)
-{
-	manage_arg(argc, argv);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (1);
+	while ((ret = read(fd, buf, BUF_SIZE)) > 0)
+	{
+		buf[ret] = '\0';
+		ft_putstr(buf);
+	}
+	if (close(fd) == -1)
+		return (1);
 	return (0);
 }
