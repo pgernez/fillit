@@ -22,7 +22,7 @@
 
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
-int		read_file(char **argv, char **new);
+int		read_file(char **argv, char ***new);
 void	print_table(char **argv);
 size_t	ft_strlen(char *str);
 

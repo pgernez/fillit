@@ -26,33 +26,3 @@ void	print_table(char **tab)
 	while (tab[i])
 		ft_putstr(tab[i++]);
 }
-
-/*
-int				main(void)
-{
-	char	*tab[10];
-	char	**new;
-	size_t	i;
-	size_t	nb_line;
-
-	i = 0;
-	nb_line = 5;
-	tab[0] = "Hello";
-	tab[1] = " mes";
-	tab[2] = " petites";
-	tab[3] = " écrevisses";
-	tab[4] = " rouges.";
-	if (!(new = (char**)malloc(sizeof(char*) * (nb_line + 1))))
-		return (0);
-	while (tab[i])
-	{
-		new[i] = tab[i];
-		i++;
-	}
-	new[i] = 0;
-	print_table(tab);
-	ft_putchar('\n');
-	print_table(new);
-	return (0);
-}
-*/
