@@ -18,7 +18,7 @@
 ** l'autre
 */
 
-void			print_table(char **tab)
+void	print_table(char **tab)
 {
 	size_t	i;
 

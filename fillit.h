@@ -6,7 +6,7 @@
 /*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/26 19:32:35 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/09 17:49:34 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/07/09 18:54:38 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-# define BUF_SIZE 100
+# define BUF_SIZE 5
 
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
