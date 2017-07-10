@@ -12,6 +12,12 @@
 
 #include "fillit.h"
 
+/*
+**	introduire dans read_file un compteur des pieces.
+**	malloc avec le nombre de pieces
+**	quand read : tous les 4\n, compter une piece
+*/
+
 int	read_file(char **argv, char ***new)
 {
 	int		fd;
@@ -33,12 +39,9 @@ int	read_file(char **argv, char ***new)
 		i++;
 	}
 	i = 0;
-	while ((ret = read(fd, (*new)[i], BUF_SIZE)) > 0)
-	{
+	while ((ret = read(fd, (*new)[i++], BUF_SIZE)) > 0)
 		(*new)[ret] = 0;
-		i++;
-	}
-	printf("Dernière valeur de read retournée : %d\n", ret);
+	//printf("Dernière valeur de read retournée : %d\n", ret);
 	(*new)[i] = 0;
 	if (close(fd) == -1)
 		return (1);
@@ -53,6 +56,6 @@ int	main(int argc, char **argv)
 	(void)argc;
 	piece = NULL;
 	status = read_file(argv, &piece);
-	print_table(piece);
+	print_table(argc, piece);
 	return (0);
 }
