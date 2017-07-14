@@ -22,8 +22,8 @@
 
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
-int		read_file(char **argv, char ***new);
-void	print_table(int argc, char **tab);
+int		read_file(char **argv, char ****new);
+void	print_table(int argc, char ***tab);
 size_t	ft_strlen(char *str);
 
 #endif

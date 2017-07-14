@@ -25,9 +25,9 @@
 	else
 		nb_n++;
 }*/
-	//printf("2. Nombre de backslah n : %zu\n", nb_n);
+	//printf("2. Nombre de backslash n : %zu\n", nb_n);
 
-int	read_file(char **argv, char ***new)
+int	read_file(char **argv, char ****new)
 {
 	int		fd;
 	int		ret;
@@ -43,24 +43,24 @@ int	read_file(char **argv, char ***new)
 	nb_line = 5;
 	nb_piece = 10;
 	//nb_n = 0;
-	if (!(new = (char***)malloc(sizeof(char**) * (nb_piece + 1))))
+	if (!(*new = (char***)malloc(sizeof(char**) * (nb_piece + 1))))
 		return (0);
-	if (!(*new = (char**)malloc(sizeof(char*) * (nb_line + 1))))
+	if (!(**new = (char**)malloc(sizeof(char*) * (nb_line + 1))))
 		return (0);
 	while (i < 5)
 	{
-		if (!((*new)[i] = (char*)malloc(sizeof(char) * (5 + 1))))
+		if (!((**new)[i] = (char*)malloc(sizeof(char) * (5 + 1))))
 			return (0);
 		i++;
 	}
 	i = 0;
-	while ((ret = read(fd, (*new)[i], BUF_SIZE)) > 0)
+	while ((ret = read(fd, (**new)[i], BUF_SIZE)) > 0)
 	{
-		(*new)[ret] = 0;
+		(**new)[ret] = 0;
 		i++;
 	}
 	printf("Dernière valeur de read retournée : %d\n", ret);
-	(*new)[i] = 0;
+	(**new)[i] = 0;
 	if (close(fd) == -1)
 		return (1);
 	return (0);
@@ -68,7 +68,7 @@ int	read_file(char **argv, char ***new)
 
 int	main(int argc, char **argv)
 {
-	char	**piece;
+	char	***piece;
 	int		status;
 
 	(void)argc;

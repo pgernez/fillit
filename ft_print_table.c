@@ -18,7 +18,7 @@
 ** l'autre
 */
 
-void	print_table(int argc, char **tab)
+void	print_table(int argc, char ***tab)
 {
 	size_t	i;
 
@@ -27,7 +27,8 @@ void	print_table(int argc, char **tab)
 		ft_putstr("usage: ./fillit pieces_file\n");
 	else
 	{
-		while (tab[i])
-			ft_putstr(tab[i++]);
+		printf("tab : %p\n", tab);
+		while ((*tab)[i])
+			ft_putstr((*tab)[i++]);
 	}
 }
