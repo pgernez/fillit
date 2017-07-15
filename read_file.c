@@ -18,49 +18,79 @@
 **	quand read : tous les 4\n, compter une piece
 */
 
-/*while (i != '\n')
-{
-	if ((**new)[i] != '\n')
-		i++;
-	else
-		nb_n++;
-}*/
-	//printf("2. Nombre de backslash n : %zu\n", nb_n);
+// static void	ft_create_tetritab()
+// {
+	// size_t	i;
+	// size_t	k;
+	// size_t	nb_piece;
+	//
+// 	k = 0;
+// 	nb_piece = 4;
+// 	if (!(*new = (char***)malloc(sizeof(char**) * nb_piece)))
+// 		return (0);
+// 	while (k < 5)
+// 	{
+// 		i = 0;
+// 		if (!((*new)[k] = (char**)malloc(sizeof(char*) * 5)))
+// 			return (0);
+// 		while (i < 5)
+// 		{
+// 			if (!((*new)[k][i] = (char*)malloc(sizeof(char) * 6)))
+// 				return (0);
+// 			i++;
+// 		}
+// 		k++;
+// 	}
+// }
 
-int	read_file(char **argv, char ****new)
+int	ft_read_file(char **argv, char ****new)
 {
 	int		fd;
 	int		ret;
 	size_t	i;
-	size_t	nb_line;
+	size_t	k;
 	size_t	nb_piece;
-	//size_t	nb_n;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (1);
-	i = 0;
-	nb_line = 5;
-	nb_piece = 10;
-	//nb_n = 0;
-	if (!(*new = (char***)malloc(sizeof(char**) * (nb_piece + 1))))
+	k = 0;
+	nb_piece = 4;
+	if (!(*new = (char***)malloc(sizeof(char**) * nb_piece)))
 		return (0);
-	if (!(**new = (char**)malloc(sizeof(char*) * (nb_line + 1))))
-		return (0);
-	while (i < 5)
+	while (k < 5)
 	{
-		if (!((**new)[i] = (char*)malloc(sizeof(char) * (5 + 1))))
+		i = 0;
+		if (!((*new)[k] = (char**)malloc(sizeof(char*) * 5)))
 			return (0);
-		i++;
+		while (i < 5)
+		{
+			if (!((*new)[k][i] = (char*)malloc(sizeof(char) * 6)))
+				return (0);
+			i++;
+		}
+		k++;
 	}
 	i = 0;
-	while ((ret = read(fd, (**new)[i], BUF_SIZE)) > 0)
+	k = 0;
+	while ((ret = read(fd, (*new)[k][i], 5)) > 0)
 	{
-		(**new)[ret] = 0;
-		i++;
+		printf("-------- Lu et stocké à k : %zu -- i : %zu\n|%s|\n", k, i, (*new)[k][i]);
+		// while (k < 5)
+		// {
+		// 	i = 0;
+		// 	while (i < 4)
+		// 	{
+		// 		printf("-------- k = %zu --- i = %zu\n", k, i);
+		// 		printf("-------- Valeur de la i+... : \n%s\n", (*new)[k][i]);
+		// 		i++;
+		// 	}
+		// 	k++;
+		// }
+		// (*new)[k][ret] = 0;
 	}
 	printf("Dernière valeur de read retournée : %d\n", ret);
-	(**new)[i] = 0;
+	(*new)[k][i] = 0;
 	if (close(fd) == -1)
 		return (1);
 	return (0);
@@ -73,9 +103,10 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	piece = NULL;
-	status = read_file(argv, &piece);
+	status = ft_read_file(argv, &piece);
+	// printf("******** Valeur de read_file : %d\n", status);
 	printf("hello\n");
-	print_table(argc, piece);
+	ft_print_tetritab(piece);
 	printf("salut\n");
 	return (0);
 }
