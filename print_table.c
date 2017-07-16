@@ -18,23 +18,7 @@
 **	Usage : ft_putstr(chaine de caractères)
 */
 
-void	ft_putstr(char *str)
-{
-	size_t	k;
-
-	// Initialisation du compteur
-	k = 0;
-	// Tant que mon (k + 1)ieme caractère de str est non null
-	while (str[k] != 0)
-	{
-	//	str[k] : (k + 1)ième caractère de type char
-	//	J'affiche le caractère str[k] qui est à l'adresse
-		write(1, &str[k], 1);
-		k++;
-	}
-}
-
-void	ft_print_piece(char **piece)
+static void	ft_print_piece(char **piece)
 {
 	size_t	j;
 
@@ -46,7 +30,7 @@ void	ft_print_piece(char **piece)
 	}
 }
 
-void	ft_print_tetritab(char ***tetritab)
+void	   ft_print_tetritab(char ***tetritab)
 {
 	size_t	i;
 	char	d;
@@ -55,7 +39,6 @@ void	ft_print_tetritab(char ***tetritab)
 	i = 0;
 	while (tetritab[i] != 0)
 	{
-	//	j = '0' + i;
 		d = i / 10 + '0';
 		u = i % 10 + '0';
 		ft_putstr("-------- ");
@@ -65,6 +48,7 @@ void	ft_print_tetritab(char ***tetritab)
 		write(1, "|", 1);
 		ft_print_piece(tetritab[i]);
 		write(1, "|", 1);
+        write(1, "\n", 1);
 		i++;
 	}
 }

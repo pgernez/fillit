@@ -11,16 +11,16 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <string.h>
 
 /*
 **	introduire dans read_file un compteur des pieces.
 **	malloc avec le nombre de pieces
-**	quand read : tous les 4\n, compter une piece
+**	quand read : tous les 4\n, compter une piece.
+**	printf("-------- Lu et stocké à k : %zu -- i : %zu\n|%s|\n -- len : %zu\n",
+**	k, i, (*new)[k][i], strlen((*new)[k][i]));
+**	printf("Dernière valeur de read retournée : %d\n", ret);
+**	printf("******** Valeur de read_file : %d\n", status);
 */
-
-// printf("-------- Lu et stocké à k : %zu -- i : %zu\n|%s|\n -- len : %zu\n", k, i, (*new)[k][i], strlen((*new)[k][i]));
-// printf("Dernière valeur de read retournée : %d\n", ret);
 
 static int		ft_create_tetritab(char ****new)
 {
@@ -90,21 +90,18 @@ int				ft_open_read_close(char **argv, char ****new)
 	return (0);
 }
 
-int				main(int argc, char **argv)
-{
-	char	***piece;
-	int		status;
-
-	if (argc != 2)
-	{
-		ft_putstr("usage: ./fillit tetriminos_file\n");
-		return (0);
-	}
-	piece = NULL;
-	status = ft_open_read_close(argv, &piece);
-	// printf("******** Valeur de read_file : %d\n", status);
-	printf("hello\n");
-	ft_print_tetritab(piece);
-	printf("\nsalut\n");
-	return (0);
-}
+// int				main(int argc, char **argv)
+// {
+// 	char	***piece;
+// 	int		status;
+//
+// 	if (argc != 2)
+// 	{
+// 		ft_putstr("usage: ./fillit tetriminos_file\n");
+// 		return (0);
+// 	}
+// 	piece = NULL;
+// 	status = ft_open_read_close(argv, &piece);
+// 	ft_print_tetritab(piece);
+// 	return (0);
+// }

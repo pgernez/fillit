@@ -13,8 +13,8 @@
 NAME = fillit
 
 SOURCE = ft_putstr.c\
-		 ft_putchar.c\
 		 read_file.c\
+		 print_table.c\
 		 main.c
 
 SOURCE_O = $(SOURCE:.c=.o)

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/26 19:32:35 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/16 19:06:50 by pgernez          ###   ########.fr       */
+/*   Created: 2017/07/16 18:53:30 by pgernez           #+#    #+#             */
+/*   Updated: 2017/07/16 18:53:35 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "fillit.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
+void	   ft_putstr(char *str)
+{
+	size_t	k;
 
-void	ft_putstr(char *str);
-int		ft_open_read_close(char **argv, char ****new);
-int		ft_input_check(char ****tetritab);
-void	ft_print_tetritab(char ***tab);
-size_t	ft_strlen(char *str);
-
-#endif
+	k = 0;
+	// Tant que mon (k + 1)ieme caractère de str est non null
+	while (str[k] != 0)
+	{
+	//	str[k] : (k + 1)ième caractère de type char
+	//	J'affiche le caractère str[k] qui est à l'adresse
+		write(1, &str[k], 1);
+		k++;
+	}
+}
