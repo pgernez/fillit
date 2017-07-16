@@ -22,11 +22,8 @@
 
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
-int		ft_read_file(char **argv, char ****new);
+int     ft_open_read_close(char **argv, char ****new);
 void	ft_print_tetritab(char ***tab);
 size_t	ft_strlen(char *str);
 
 #endif
-
-
-// (*new)[k][ret] = 0;

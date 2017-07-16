@@ -6,11 +6,12 @@
 /*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 19:30:31 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/09 23:10:11 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/07/16 17:00:32 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <string.h>
 
 /*
 **	introduire dans read_file un compteur des pieces.
@@ -18,47 +19,18 @@
 **	quand read : tous les 4\n, compter une piece
 */
 
-// static void	ft_create_tetritab()
-// {
-	// size_t	i;
-	// size_t	k;
-	// size_t	nb_piece;
-	//
-// 	k = 0;
-// 	nb_piece = 4;
-// 	if (!(*new = (char***)malloc(sizeof(char**) * nb_piece)))
-// 		return (0);
-// 	while (k < 5)
-// 	{
-// 		i = 0;
-// 		if (!((*new)[k] = (char**)malloc(sizeof(char*) * 5)))
-// 			return (0);
-// 		while (i < 5)
-// 		{
-// 			if (!((*new)[k][i] = (char*)malloc(sizeof(char) * 6)))
-// 				return (0);
-// 			i++;
-// 		}
-// 		k++;
-// 	}
-// }
+// printf("-------- Lu et stocké à k : %zu -- i : %zu\n|%s|\n -- len : %zu\n", k, i, (*new)[k][i], strlen((*new)[k][i]));
+// printf("Dernière valeur de read retournée : %d\n", ret);
 
-int	ft_read_file(char **argv, char ****new)
+static int		ft_create_tetritab(char ****new)
 {
-	int		fd;
-	int		ret;
 	size_t	i;
 	size_t	k;
-	size_t	nb_piece;
 
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (1);
 	k = 0;
-	nb_piece = 4;
-	if (!(*new = (char***)malloc(sizeof(char**) * nb_piece)))
+	if (!((*new) = (char***)malloc(sizeof(char**) * 27)))
 		return (0);
-	while (k < 5)
+	while (k < 27)
 	{
 		i = 0;
 		if (!((*new)[k] = (char**)malloc(sizeof(char*) * 5)))
@@ -71,42 +43,68 @@ int	ft_read_file(char **argv, char ****new)
 		}
 		k++;
 	}
+	return (0);
+}
+
+static size_t	ft_read_file(int fd, size_t k, char ****new)
+{
+	int		ret;
+	size_t	i;
+	size_t	step;
+
 	i = 0;
-	k = 0;
-	while ((ret = read(fd, (*new)[k][i], 5)) > 0)
+	step = 5;
+	while ((ret = read(fd, (*new)[k][i], step)) > 0)
 	{
-		printf("-------- Lu et stocké à k : %zu -- i : %zu\n|%s|\n", k, i, (*new)[k][i]);
-		// while (k < 5)
-		// {
-		// 	i = 0;
-		// 	while (i < 4)
-		// 	{
-		// 		printf("-------- k = %zu --- i = %zu\n", k, i);
-		// 		printf("-------- Valeur de la i+... : \n%s\n", (*new)[k][i]);
-		// 		i++;
-		// 	}
-		// 	k++;
-		// }
-		// (*new)[k][ret] = 0;
+		(*new)[k][i][ret] = 0;
+		if (i == 0 && step == 1)
+			i = 0;
+		else
+			i++;
+		step = 5;
+		if (i == 4)
+		{
+			step = 1;
+			(*new)[k][i] = NULL;
+			k++;
+			i = 0;
+		}
 	}
-	printf("Dernière valeur de read retournée : %d\n", ret);
-	(*new)[k][i] = 0;
+	(*new)[k] = NULL;
+	return (0);
+}
+
+int				ft_open_read_close(char **argv, char ****new)
+{
+	int		fd;
+	size_t	k;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (1);
+	ft_create_tetritab(new);
+	k = 0;
+	ft_read_file(fd, k, new);
 	if (close(fd) == -1)
 		return (1);
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	char	***piece;
 	int		status;
 
-	(void)argc;
+	if (argc != 2)
+	{
+		ft_putstr("usage: ./fillit tetriminos_file\n");
+		return (0);
+	}
 	piece = NULL;
-	status = ft_read_file(argv, &piece);
+	status = ft_open_read_close(argv, &piece);
 	// printf("******** Valeur de read_file : %d\n", status);
 	printf("hello\n");
 	ft_print_tetritab(piece);
-	printf("salut\n");
+	printf("\nsalut\n");
 	return (0);
 }
