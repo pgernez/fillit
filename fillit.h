@@ -20,7 +20,7 @@
 
 void	ft_putstr(char *str);
 int		ft_open_read_close(char **argv, char ****new);
-int		ft_input_check(char ****tetritab);
+int		ft_input_check(char ***tetritab);
 void	ft_print_tetritab(char ***tab);
 size_t	ft_strlen(char *str);
 
