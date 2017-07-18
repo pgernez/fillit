@@ -24,7 +24,7 @@ static int	ft_backslash_check(char ***tetritab)
 	size_t	k;
 
 	k = 0;
-	while (k < 27)
+	while (k < 26)
 	{
 		j = 0;
 		while (j < 4)
@@ -34,10 +34,8 @@ static int	ft_backslash_check(char ***tetritab)
 			{
 				if (tetritab[k][j][i] == '\n')
 					return (1);
-				else
-					return (0);
-				// printf("-------- k : %zu --- j : %zu --- i : %zu\n", k, j, i);
 				i++;
+				printf("--- k : %zu --- j : %zu --- i : %zu\n", k, j, i);
 			}
 			if (tetritab[k][j][4] != '\n')
 				return (1);
@@ -71,15 +69,15 @@ static int	ft_backslash_check(char ***tetritab)
 // 			printf("hello\n");
 // 			while (i < 4)
 // 			{
-// 				printf("--- sharp : %zu --- k : %zu --- j : %zu --- i : %zu\n", sharp, k, j, i);
 // 				if (tetritab[k][j][i] == '#')
 // 					sharp++;
+// 				printf("--- k : %zu --- j : %zu --- i : %zu --- sharp : %zu\n", k, j, i, sharp);
 // 				i++;
 // 			}
-// 			if (sharp != 4)
-// 				return (1);
 // 			j++;
 // 		}
+// 		if (sharp != 4)
+// 			return (1);
 // 		k++;
 // 	}
 // 	return (0);
@@ -90,9 +88,35 @@ static int	ft_backslash_check(char ***tetritab)
 **  if not.
 */
 
-// static int  ft_dots_check()
+// static int  ft_dots_check(char ***tetritab)
 // {
-//     return (0);
+// 	size_t	i;
+// 	size_t	j;
+// 	size_t	k;
+// 	size_t	dots;
+//
+// 	k = 0;
+// 	while (k < 27)
+// 	{
+// 		dots = 0;
+// 		j = 0;
+// 		while (j < 4)
+// 		{
+// 			i = 0;
+// 			while (i < 4)
+// 			{
+// 				if (tetritab[k][j][i] == '.')
+// 					dots++;
+// 				printf("--- k : %zu --- j : %zu --- i : %zu --- dots : %zu\n", k, j, i, dots);
+// 				i++;
+// 			}
+// 			j++;
+// 		}
+// 		if (dots != 12)
+// 			return (1);
+// 		k++;
+// 	}
+// 	return (0);
 // }
 
 /*
@@ -104,14 +128,14 @@ static int	ft_backslash_check(char ***tetritab)
 //     return (0);
 // }
 //
-// int     ft_input_check(char ****tetritab)
-// {
-//     ft_backslash_check(tetritab);
-//     ft_sharp_check();
-//     ft_dots_check();
-//     ft_pattern_check();
-//     return (0);
-// }
+int     ft_input_check(char ***tetritab)
+{
+    ft_backslash_check(tetritab);
+    // ft_sharp_check(tetritab);
+    // ft_dots_check(tetritab);
+    // ft_pattern_check(tetritab);
+    return (0);
+}
 
 int				main(int argc, char **argv)
 {
@@ -125,8 +149,7 @@ int				main(int argc, char **argv)
 	}
 	piece = NULL;
 	status = ft_open_read_close(argv, &piece);
-	ft_backslash_check(piece);
-	// ft_sharp_check(piece);
+	ft_input_check(piece);
 	ft_print_tetritab(piece);
 	return (0);
 }
