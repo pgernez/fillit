@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <string.h>
 
 /*
 **	introduire dans read_file un compteur des pieces.
@@ -24,7 +25,7 @@
 
 static int		ft_create_tetritab(char ****new)
 {
-	size_t	i;
+	size_t	j;
 	size_t	k;
 
 	k = 0;
@@ -32,14 +33,14 @@ static int		ft_create_tetritab(char ****new)
 		return (0);
 	while (k < 27)
 	{
-		i = 0;
+		j = 0;
 		if (!((*new)[k] = (char**)malloc(sizeof(char*) * 5)))
 			return (0);
-		while (i < 5)
+		while (j < 5)
 		{
-			if (!((*new)[k][i] = (char*)malloc(sizeof(char) * 6)))
+			if (!((*new)[k][j] = (char*)malloc(sizeof(char) * 6)))
 				return (0);
-			i++;
+			j++;
 		}
 		k++;
 	}
@@ -74,17 +75,31 @@ static size_t	ft_read_file(int fd, size_t k, char ****new)
 	return (0);
 }
 
+// static size_t	ft_len_file(char *new)
+// {
+// 	size_t	len;
+//
+// 	len = ft_strlen(new);
+// 	return (len);
+// }
+
 int				ft_open_read_close(char **argv, char ****new)
 {
 	int		fd;
 	size_t	k;
+	size_t	i;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (1);
 	ft_create_tetritab(new);
 	k = 0;
+	i = 0;
+	// ft_len_file(*argv);
+	printf("len : %zu\n", ft_strlen(*argv));
+	printf("len : %zu\n", strlen(*argv));
 	ft_read_file(fd, k, new);
+	// 	ft_putstr("File is empty.\n");
 	if (close(fd) == -1)
 		return (1);
 	return (0);
