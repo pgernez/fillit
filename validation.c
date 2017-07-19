@@ -6,7 +6,7 @@
 /*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 18:07:13 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/17 17:57:22 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/07/19 15:35:07 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,19 @@ static int	ft_backslash_check(char ***tetritab)
 	size_t	k;
 
 	k = 0;
-	while (k < 26)
+	while (tetritab[k] != NULL)
 	{
 		j = 0;
-		while (j < 4)
+		while (tetritab[k][j] != 0)
 		{
 			i = 0;
-			while (i < 4)
-			{
-				if (tetritab[k][j][i] == '\n')
-					return (1);
+			while (tetritab[k][j][i] != 0)
 				i++;
-				printf("--- k : %zu --- j : %zu --- i : %zu\n", k, j, i);
-			}
 			if (tetritab[k][j][4] != '\n')
+			{
+				printf("problem ln\n");
 				return (1);
+			}
 			j++;
 		}
 		k++;
@@ -50,106 +48,85 @@ static int	ft_backslash_check(char ***tetritab)
 **  ft_sharp_check returns 0 if we count 4 # in a piece or 1 if != 4
 */
 
-// static int	ft_sharp_check(char ***tetritab)
-// {
-// 	size_t	i;
-// 	size_t	j;
-// 	size_t	k;
-// 	size_t	sharp;
-//
-// 	printf("hello\n");
-// 	k = 0;
-// 	while (k < 27)
-// 	{
-// 		sharp = 0;
-// 		j = 0;
-// 		while (j < 4)
-// 		{
-// 			i = 0;
-// 			printf("hello\n");
-// 			while (i < 4)
-// 			{
-// 				if (tetritab[k][j][i] == '#')
-// 					sharp++;
-// 				printf("--- k : %zu --- j : %zu --- i : %zu --- sharp : %zu\n", k, j, i, sharp);
-// 				i++;
-// 			}
-// 			j++;
-// 		}
-// 		if (sharp != 4)
-// 			return (1);
-// 		k++;
-// 	}
-// 	return (0);
-// }
+static int	ft_sharp_check(char ***tetritab)
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	size_t	sharp;
+
+	k = 0;
+	while (tetritab[k] != NULL)
+	{
+		sharp = 0;
+		j = 0;
+		while (tetritab[k][j] != 0)
+		{
+			i = 0;
+			while (tetritab[k][j][i] != 0)
+			{
+				if (tetritab[k][j][i++] == '#')
+					sharp++;
+			}
+			j++;
+		}
+		if (sharp != 4)
+			return (1);
+		k++;
+	}
+	return (0);
+}
 
 /*
 **  ft_dots_check returns 0 if the rest of the piece is filled with dots or 1
 **  if not.
 */
 
-// static int  ft_dots_check(char ***tetritab)
-// {
-// 	size_t	i;
-// 	size_t	j;
-// 	size_t	k;
-// 	size_t	dots;
-//
-// 	k = 0;
-// 	while (k < 27)
-// 	{
-// 		dots = 0;
-// 		j = 0;
-// 		while (j < 4)
-// 		{
-// 			i = 0;
-// 			while (i < 4)
-// 			{
-// 				if (tetritab[k][j][i] == '.')
-// 					dots++;
-// 				printf("--- k : %zu --- j : %zu --- i : %zu --- dots : %zu\n", k, j, i, dots);
-// 				i++;
-// 			}
-// 			j++;
-// 		}
-// 		if (dots != 12)
-// 			return (1);
-// 		k++;
-// 	}
-// 	return (0);
-// }
+static int	ft_dots_check(char ***tetritab)
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	size_t	dots;
+
+	k = 0;
+	while (tetritab[k] != NULL)
+	{
+		dots = 0;
+		j = 0;
+		while (tetritab[k][j] != 0)
+		{
+			i = 0;
+			while (tetritab[k][j][i] != 0)
+			{
+				if (tetritab[k][j][i++] == '.')
+					dots++;
+			}
+			j++;
+		}
+		if (dots != 12)
+			return (1);
+		k++;
+	}
+	return (0);
+}
 
 /*
 **  ft_pattern_check returns 0 if the pattern is correct or 1 if not.
 */
 
-// static int  ft_pattern_check()
-// {
-//     return (0);
-// }
-//
-int     ft_input_check(char ***tetritab)
+static int	ft_pattern_check(char ***tetritab)
 {
-    ft_backslash_check(tetritab);
-    // ft_sharp_check(tetritab);
-    // ft_dots_check(tetritab);
-    // ft_pattern_check(tetritab);
-    return (0);
+	if (tetritab == NULL)
+		return (1);
+	return (0);
 }
 
-int				main(int argc, char **argv)
+int			ft_input_check(char ***tetritab)
 {
-	char	***piece;
-	int		status;
-
-	if (argc != 2)
-	{
-		ft_putstr("usage: ./fillit tetriminos_file\n");
-		return (0);
-	}
-	piece = NULL;
-	status = ft_open_read_close(argv, &piece);
-	ft_input_check(piece);
-	ft_print_tetritab(piece);
+	ft_backslash_check(tetritab);
+	ft_sharp_check(tetritab);
+	ft_dots_check(tetritab);
+	ft_pattern_check(tetritab);
 	return (0);
 }

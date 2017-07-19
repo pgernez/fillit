@@ -90,18 +90,24 @@ int				ft_open_read_close(char **argv, char ****new)
 	return (0);
 }
 
-// int				main(int argc, char **argv)
-// {
-// 	char	***piece;
-// 	int		status;
-//
-// 	if (argc != 2)
-// 	{
-// 		ft_putstr("usage: ./fillit tetriminos_file\n");
-// 		return (0);
-// 	}
-// 	piece = NULL;
-// 	status = ft_open_read_close(argv, &piece);
-// 	ft_print_tetritab(piece);
-// 	return (0);
-// }
+int			main(int argc, char **argv)
+{
+	char	***piece;
+	int		status;
+
+	if (argc == 1)
+	{
+		ft_putstr("usage: ./fillit tetriminos_file\nFile name missing\n");
+		return (0);
+	}
+	if (argc > 2)
+	{
+		ft_putstr("usage: ./fillit tetriminos_file\nToo many arguments\n");
+		return (0);
+	}
+	piece = NULL;
+	status = ft_open_read_close(argv, &piece);
+	ft_input_check(piece);
+	ft_print_tetritab(piece);
+	return (0);
+}
