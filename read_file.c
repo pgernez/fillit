@@ -96,8 +96,8 @@ int				ft_open_read_close(char **argv, char ****new)
 	k = 0;
 	i = 0;
 	// ft_len_file(*argv);
-	printf("len : %zu\n", ft_strlen(*argv));
-	printf("len : %zu\n", strlen(*argv));
+	// printf("len : %zu\n", ft_strlen(*argv));
+	// printf("len : %zu\n", strlen(*argv));
 	ft_read_file(fd, k, new);
 	// 	ft_putstr("File is empty.\n");
 	if (close(fd) == -1)

@@ -117,8 +117,43 @@ static int	ft_dots_check(char ***tetritab)
 
 static int	ft_pattern_check(char ***tetritab)
 {
-	if (tetritab == NULL)
-		return (1);
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	size_t	pattern;
+
+	k = 0;
+	while (tetritab[k] != NULL)
+	{
+		pattern = 0;
+		j = 0;
+		while (tetritab[k][j] != 0)
+		{
+			i = 0;
+			while (tetritab[k][j][i] != 0)
+			{
+				if ((tetritab[k][j][i] == '#') && (tetritab[k][j][i + 1] == '#'))
+					pattern++;
+				if ((tetritab[k][j][i] == '#') && (tetritab[k][j][i - 1] == '#'))
+					pattern++;
+				// if (tetritab[k][j][i] == '#' && tetritab[k][j + 1][i] == '#')
+				// 	pattern++;
+				// if (tetritab[k][j][i] == '#' && tetritab[k][j - 1][i] == '#')
+				// 	pattern++;
+				printf("--- k : %zu -- j : %zu -- i : %zu -- pattern : %zu\n", k, j, i, pattern);
+				i++;
+			}
+			if (tetritab[k][j + 1][i] == '#')
+				pattern++;
+			j++;
+		}
+		if (pattern != 6)
+		{
+			printf("wrong\n");
+			return (1);
+		}
+		k++;
+	}
 	return (0);
 }
 
