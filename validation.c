@@ -15,28 +15,27 @@
 /*
 **	ft_backslash_check returns 0 if there are 4 well-positionned \n or 1 if != 4
 **	or not at the end of a line.
+**	printf("--- k : %zu -- j : %zu -- i : %zu -- pattern : %zu\n", k, j, i,
+**	pattern);
 */
 
-static int	ft_backslash_check(char ***tetritab)
+static int	ft_backslash_check(char ***tab)
 {
 	size_t	i;
 	size_t	j;
 	size_t	k;
 
 	k = 0;
-	while (tetritab[k] != NULL)
+	while (tab[k] != NULL)
 	{
 		j = 0;
-		while (tetritab[k][j] != 0)
+		while (tab[k][j] != 0)
 		{
 			i = 0;
-			while (tetritab[k][j][i] != 0)
+			while (tab[k][j][i] != 0)
 				i++;
-			if (tetritab[k][j][4] != '\n')
-			{
-				printf("problem ln\n");
+			if (tab[k][j][4] != '\n')
 				return (1);
-			}
 			j++;
 		}
 		k++;
@@ -48,7 +47,7 @@ static int	ft_backslash_check(char ***tetritab)
 **  ft_sharp_check returns 0 if we count 4 # in a piece or 1 if != 4
 */
 
-static int	ft_sharp_check(char ***tetritab)
+static int	ft_sharp_check(char ***tab)
 {
 	size_t	i;
 	size_t	j;
@@ -56,16 +55,16 @@ static int	ft_sharp_check(char ***tetritab)
 	size_t	sharp;
 
 	k = 0;
-	while (tetritab[k] != NULL)
+	while (tab[k] != NULL)
 	{
 		sharp = 0;
 		j = 0;
-		while (tetritab[k][j] != 0)
+		while (tab[k][j] != 0)
 		{
 			i = 0;
-			while (tetritab[k][j][i] != 0)
+			while (tab[k][j][i] != 0)
 			{
-				if (tetritab[k][j][i++] == '#')
+				if (tab[k][j][i++] == '#')
 					sharp++;
 			}
 			j++;
@@ -82,7 +81,7 @@ static int	ft_sharp_check(char ***tetritab)
 **  if not.
 */
 
-static int	ft_dots_check(char ***tetritab)
+static int	ft_dots_check(char ***tab)
 {
 	size_t	i;
 	size_t	j;
@@ -90,16 +89,16 @@ static int	ft_dots_check(char ***tetritab)
 	size_t	dots;
 
 	k = 0;
-	while (tetritab[k] != NULL)
+	while (tab[k] != NULL)
 	{
 		dots = 0;
 		j = 0;
-		while (tetritab[k][j] != 0)
+		while (tab[k][j] != 0)
 		{
 			i = 0;
-			while (tetritab[k][j][i] != 0)
+			while (tab[k][j][i] != 0)
 			{
-				if (tetritab[k][j][i++] == '.')
+				if (tab[k][j][i++] == '.')
 					dots++;
 			}
 			j++;
@@ -115,53 +114,47 @@ static int	ft_dots_check(char ***tetritab)
 **  ft_pattern_check returns 0 if the pattern is correct or 1 if not.
 */
 
-static int	ft_pattern_check(char ***tetritab)
+static int	ft_pattern_check(size_t k, size_t j, size_t i, char ***tab)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
 	size_t	pattern;
 
-	k = 0;
-	while (tetritab[k] != NULL)
+	while (tab[++k] != NULL)
 	{
 		pattern = 0;
-		j = 0;
-		while (tetritab[k][j] != 0)
+		j = -1;
+		while (tab[k][++j] != 0)
 		{
-			i = 0;
-			while (tetritab[k][j][i] != 0)
+			i = -1;
+			while (tab[k][j][++i] != 0)
 			{
-				if ((tetritab[k][j][i] == '#') && (tetritab[k][j][i + 1] == '#'))
+				if (tab[k][j][i] == '#' && tab[k][j][i + 1] == '#')
 					pattern++;
-				if ((tetritab[k][j][i] == '#') && (tetritab[k][j][i - 1] == '#'))
+				if (tab[k][j][i] == '#' && tab[k][j][i - 1] == '#')
 					pattern++;
-				// if (tetritab[k][j][i] == '#' && tetritab[k][j + 1][i] == '#')
-				// 	pattern++;
-				// if (tetritab[k][j][i] == '#' && tetritab[k][j - 1][i] == '#')
-				// 	pattern++;
-				printf("--- k : %zu -- j : %zu -- i : %zu -- pattern : %zu\n", k, j, i, pattern);
-				i++;
+				if (j != 0 && tab[k][j][i] == '#' && tab[k][j - 1][i] == '#')
+					pattern++;
+				if (j < 3 && tab[k][j][i] == '#' && tab[k][j + 1][i] == '#')
+					pattern++;
 			}
-			if (tetritab[k][j + 1][i] == '#')
-				pattern++;
-			j++;
 		}
 		if (pattern != 6)
-		{
-			printf("wrong\n");
 			return (1);
-		}
-		k++;
 	}
 	return (0);
 }
 
-int			ft_input_check(char ***tetritab)
+int			ft_input_check(char ***tab)
 {
-	ft_backslash_check(tetritab);
-	ft_sharp_check(tetritab);
-	ft_dots_check(tetritab);
-	ft_pattern_check(tetritab);
+	size_t	i;
+	size_t	j;
+	size_t	k;
+
+	i = -1;
+	j = -1;
+	k = -1;
+	ft_backslash_check(tab);
+	ft_sharp_check(tab);
+	ft_dots_check(tab);
+	ft_pattern_check(k, j, i, tab);
 	return (0);
 }
