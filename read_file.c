@@ -31,7 +31,7 @@ static int		ft_create_tetritab(char ****new)
 	k = 0;
 	if (!((*new) = (char***)malloc(sizeof(char**) * 27)))
 		return (0);
-	while (k < 27)
+	while (k <= 26)
 	{
 		j = 0;
 		if (!((*new)[k] = (char**)malloc(sizeof(char*) * 5)))
@@ -44,6 +44,9 @@ static int		ft_create_tetritab(char ****new)
 		}
 		k++;
 	}
+	k++;
+	if (k == 27)
+		return (1);
 	return (0);
 }
 
@@ -92,7 +95,11 @@ int				ft_open_read_close(char **argv, char ****new)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (1);
-	ft_create_tetritab(new);
+	if (ft_create_tetritab(new) == 1)
+	{
+		ft_putstr("error again\n");
+		return (1);
+	}
 	k = 0;
 	i = 0;
 	// ft_len_file(*argv);
@@ -112,12 +119,12 @@ int			main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		ft_putstr("usage: ./fillit tetriminos_file\nFile name missing\n");
+		ft_putstr("File name missing\nusage: ./fillit tetriminos_file\n");
 		return (0);
 	}
 	if (argc > 2)
 	{
-		ft_putstr("usage: ./fillit tetriminos_file\nToo many arguments\n");
+		ft_putstr("Too many arguments\nusage: ./fillit tetriminos_file\n");
 		return (0);
 	}
 	piece = NULL;

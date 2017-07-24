@@ -137,7 +137,7 @@ static int	ft_pattern_check(size_t k, size_t j, size_t i, char ***tab)
 					pattern++;
 			}
 		}
-		if (pattern != 6)
+		if (pattern != 6 && pattern != 8)
 			return (1);
 	}
 	return (0);
@@ -151,10 +151,20 @@ int			ft_input_check(char ***tab)
 
 	i = -1;
 	j = -1;
+	k = 0;
+	if (tab[k] == 0)
+	{
+		ft_putstr("error\n");
+		return (1);
+	}
+	if (ft_backslash_check(tab) == 1)
+		ft_putstr("error\n");
+	else if (ft_sharp_check(tab) == 1)
+		ft_putstr("error\n");
+	else if (ft_dots_check(tab) == 1)
+		ft_putstr("error\n");
 	k = -1;
-	ft_backslash_check(tab);
-	ft_sharp_check(tab);
-	ft_dots_check(tab);
-	ft_pattern_check(k, j, i, tab);
+	if (ft_pattern_check(k, j, i, tab) == 1)
+		ft_putstr("error\n");
 	return (0);
 }
