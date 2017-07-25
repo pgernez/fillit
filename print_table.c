@@ -6,7 +6,7 @@
 /*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 11:45:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/16 15:52:37 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/07/25 10:25:06 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_print_piece(char **piece)
 	}
 }
 
-void	   ft_print_tetritab(char ***tetritab)
+void		ft_print_tetritab(char ***tetritab)
 {
 	size_t	i;
 	char	d;
@@ -48,7 +48,7 @@ void	   ft_print_tetritab(char ***tetritab)
 		write(1, "|", 1);
 		ft_print_piece(tetritab[i]);
 		write(1, "|", 1);
-        write(1, "\n", 1);
+		write(1, "\n", 1);
 		i++;
 	}
 }

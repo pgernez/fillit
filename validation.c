@@ -152,19 +152,21 @@ int			ft_input_check(char ***tab)
 	i = -1;
 	j = -1;
 	k = 0;
-	if (tab[k] == 0)
+	if (tab[k] == 0 || ft_backslash_check(tab) == 1)
 	{
 		ft_putstr("error\n");
 		return (1);
 	}
-	if (ft_backslash_check(tab) == 1)
+	if (ft_sharp_check(tab) == 1 || ft_dots_check(tab) == 1)
+	{
 		ft_putstr("error\n");
-	else if (ft_sharp_check(tab) == 1)
-		ft_putstr("error\n");
-	else if (ft_dots_check(tab) == 1)
-		ft_putstr("error\n");
+		return (1);
+	}
 	k = -1;
 	if (ft_pattern_check(k, j, i, tab) == 1)
+	{
 		ft_putstr("error\n");
+		return (1);
+	}
 	return (0);
 }

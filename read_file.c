@@ -6,7 +6,7 @@
 /*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 19:30:31 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/16 17:00:32 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/07/25 10:25:37 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,20 @@ static int		ft_create_tetritab(char ****new)
 
 	k = 0;
 	if (!((*new) = (char***)malloc(sizeof(char**) * 27)))
-		return (0);
-	while (k <= 26)
+		return (1);
+	while (k < 27)
 	{
 		j = 0;
 		if (!((*new)[k] = (char**)malloc(sizeof(char*) * 5)))
-			return (0);
+			return (1);
 		while (j < 5)
 		{
 			if (!((*new)[k][j] = (char*)malloc(sizeof(char) * 6)))
-				return (0);
+				return (1);
 			j++;
 		}
 		k++;
 	}
-	k++;
-	if (k == 27)
-		return (1);
 	return (0);
 }
 
@@ -58,7 +55,7 @@ static size_t	ft_read_file(int fd, size_t k, char ****new)
 
 	i = 0;
 	step = 5;
-	while ((ret = read(fd, (*new)[k][i], step)) > 0)
+	while ((ret = read(fd, (*new)[k][i], step)) > 0 && k < 26)
 	{
 		(*new)[k][i][ret] = 0;
 		if (i == 0 && step == 1)
@@ -69,22 +66,15 @@ static size_t	ft_read_file(int fd, size_t k, char ****new)
 		if (i == 4)
 		{
 			step = 1;
-			(*new)[k][i] = NULL;
-			k++;
+			(*new)[k++][i] = NULL;
 			i = 0;
 		}
 	}
+	if (ret != 0)
+		return (1);
 	(*new)[k] = NULL;
 	return (0);
 }
-
-// static size_t	ft_len_file(char *new)
-// {
-// 	size_t	len;
-//
-// 	len = ft_strlen(new);
-// 	return (len);
-// }
 
 int				ft_open_read_close(char **argv, char ****new)
 {
@@ -97,25 +87,24 @@ int				ft_open_read_close(char **argv, char ****new)
 		return (1);
 	if (ft_create_tetritab(new) == 1)
 	{
-		ft_putstr("error again\n");
+		ft_putstr("error\n");
 		return (1);
 	}
 	k = 0;
 	i = 0;
-	// ft_len_file(*argv);
-	// printf("len : %zu\n", ft_strlen(*argv));
-	// printf("len : %zu\n", strlen(*argv));
-	ft_read_file(fd, k, new);
-	// 	ft_putstr("File is empty.\n");
+	if (ft_read_file(fd, k, new) == 1)
+	{
+		ft_putstr("error\n");
+		return (1);
+	}
 	if (close(fd) == -1)
 		return (1);
 	return (0);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	char	***piece;
-	int		status;
 
 	if (argc == 1)
 	{
@@ -128,8 +117,10 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	piece = NULL;
-	status = ft_open_read_close(argv, &piece);
-	ft_input_check(piece);
+	if (ft_open_read_close(argv, &piece) == 1)
+		return (1);
+	if (ft_input_check(piece) == 1)
+		return (1);
 	ft_print_tetritab(piece);
 	return (0);
 }
