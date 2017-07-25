@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <string.h>
 
 /*
 **	introduire dans read_file un compteur des pieces.
@@ -19,11 +18,9 @@
 **	quand read : tous les 4\n, compter une piece.
 **	printf("-------- Lu et stocké à k : %zu -- i : %zu\n|%s|\n -- len : %zu\n",
 **	k, i, (*new)[k][i], strlen((*new)[k][i]));
-**	printf("Dernière valeur de read retournée : %d\n", ret);
-**	printf("******** Valeur de read_file : %d\n", status);
 */
 
-static int		ft_create_tetritab(char ****new)
+static int	ft_create_piecetab(char ****new)
 {
 	size_t	j;
 	size_t	k;
@@ -47,7 +44,7 @@ static int		ft_create_tetritab(char ****new)
 	return (0);
 }
 
-static size_t	ft_read_file(int fd, size_t k, char ****new)
+static int	ft_read_file(int fd, size_t k, char ****new)
 {
 	int		ret;
 	size_t	i;
@@ -76,7 +73,7 @@ static size_t	ft_read_file(int fd, size_t k, char ****new)
 	return (0);
 }
 
-int				ft_open_read_close(char **argv, char ****new)
+int			ft_open_read_close(char **argv, char ****new)
 {
 	int		fd;
 	size_t	k;
@@ -85,7 +82,7 @@ int				ft_open_read_close(char **argv, char ****new)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (1);
-	if (ft_create_tetritab(new) == 1)
+	if (ft_create_piecetab(new) == 1)
 	{
 		ft_putstr("error\n");
 		return (1);
@@ -99,28 +96,5 @@ int				ft_open_read_close(char **argv, char ****new)
 	}
 	if (close(fd) == -1)
 		return (1);
-	return (0);
-}
-
-int				main(int argc, char **argv)
-{
-	char	***piece;
-
-	if (argc == 1)
-	{
-		ft_putstr("File name missing\nusage: ./fillit tetriminos_file\n");
-		return (0);
-	}
-	if (argc > 2)
-	{
-		ft_putstr("Too many arguments\nusage: ./fillit tetriminos_file\n");
-		return (0);
-	}
-	piece = NULL;
-	if (ft_open_read_close(argv, &piece) == 1)
-		return (1);
-	if (ft_input_check(piece) == 1)
-		return (1);
-	ft_print_tetritab(piece);
 	return (0);
 }

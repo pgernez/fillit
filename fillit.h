@@ -12,11 +12,15 @@
 
 #ifndef FILLIT_H
 # define FILLIT_H
+/*
+**	ATTENTION NETTOYER LES INCLUDES DE .h
+*/
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <string.h>
 
 void	ft_putstr(char *str);
 int		ft_open_read_close(char **argv, char ****new);

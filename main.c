@@ -12,19 +12,29 @@
 
 #include "fillit.h"
 
-int	manage_arg(int argc, char **argv)
-{
-	if (argc == 1)
-		ft_putstr("File name missing.\n");
-	if (argc > 2)
-		ft_putstr("Too many arguments.\n");
-	else
-		read_file(argv);
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
-	manage_arg(argc, argv);
+	char	***piece;
+	size_t	n;
+
+	if (argc == 1)
+	{
+		ft_putstr("File name missing\nusage: ./fillit tetriminos_file\n");
+		return (0);
+	}
+	if (argc > 2)
+	{
+		ft_putstr("Too many arguments\nusage: ./fillit tetriminos_file\n");
+		return (0);
+	}
+	piece = NULL;
+	if (ft_open_read_close(argv, &piece) == 1)
+		return (1);
+	if (ft_input_check(piece) == 1)
+		return (1);
+	n = 4;
+	if (ft_create_map(n, piece) == 1)
+		return (1);
+	ft_print_tetritab(piece);
 	return (0);
 }
