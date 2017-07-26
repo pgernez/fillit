@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	if (ft_input_check(piece) == 1)
 		return (1);
 	n = 4;
-	if (ft_create_map(n, piece) == 1)
+	if (ft_solve(n, &piece) == 1)
 		return (1);
 	ft_print_tetritab(piece);
 	return (0);
