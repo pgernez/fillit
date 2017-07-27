@@ -40,6 +40,8 @@ static char	**ft_create_map(size_t n)
 	return (map);
 }
 
+// faire une fonction qui le créée, qui prend en argument ton vrai nombre de pièces, et l'adresse où tu vas le créer, et qui retourne 0 si la création a été correcte, et 1 sinon.
+
 static int	**ft_create_tab_pos(int k, char ****tab_pos)
 {
 	if (!((*tab_pos) = (char***)malloc(sizeof(char**) * k + 1)))
@@ -49,7 +51,9 @@ static int	**ft_create_tab_pos(int k, char ****tab_pos)
 
 static int	**ft_get_sharp_pos(char ****tab_pos)
 {
+	ft_create_tab_pos(k, tab_pos);
 	//remplis le tableau précédemment créé
+	// faire une fonction qui te fait passer de ton tableau de pièces représentées par un tableau de lignes, à un tableau de pièces représentées par un tableau (de taille 4) de 2 entiers (correspondant aux coordonnées de ta pièce)
 	return (0);
 }
 
@@ -58,7 +62,6 @@ int	*ft_solve(size_t n, char ****tab_pos)
 {
 	if (ft_create_map(n) == 1)
 		return (1);
-	ft_create_tab_pos(k, tab_pos);
 	ft_get_sharp_pos();
 	return (0);
 }
