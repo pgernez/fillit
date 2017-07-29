@@ -20,66 +20,94 @@
 **	4. Coordonnées
 */
 
-// ft_get_pos_of_sharp(char **piece, int ***relative_pos)
-// ft_get_pos_of_sharp(char ***piece, int ****relative_pos)
+// static char	**ft_create_map(size_t n)
+// {
+// 	char	**map;
+// 	size_t	line;
+//
+// 	if (!(map = (char**)malloc(sizeof(char*) * (n + 1))))
+// 		return (1);
+// 	line = 0;
+// 	while (line < n)
+// 	{
+// 		if (!(map[line] = (char*)malloc(sizeof(char) * (n + 1))))
+// 			return (1);
+// 		line++;
+// 	}
+// 	return (map);
+// }
 
-static char	**ft_create_map(size_t n)
+static int	ft_create_coord(size_t nb_piece, char ****coord)
 {
-	char	**map;
-	size_t	line;
+	size_t	j;
+	size_t	k;
 
-	if (!(map = (char**)malloc(sizeof(char*) * (n + 1))))
+	k = 0;
+	if (!((*coord) = (char***)malloc(sizeof(char**) * (nb_piece + 1))))
 		return (1);
-	line = 0;
-	while (line < n)
+	while (k < nb_piece)
 	{
-		if (!(map[line] = (char*)malloc(sizeof(char) * (n + 1))))
+		j = 0;
+		if (!((*coord)[k] = (char**)malloc(sizeof(char*) * 4)))
 			return (1);
-		line++;
+		while (j < 4)
+		{
+			if (!((*coord)[k][j] = (char*)malloc(sizeof(char) * 2)))
+				return (1);
+			j++;
+		}
+		k++;
 	}
-	return (map);
+	return (0);
 }
 
-// faire une fonction qui le créée, qui prend en argument ton vrai nombre de pièces, et l'adresse où tu vas le créer, et qui retourne 0 si la création a été correcte, et 1 sinon.
-
-static int	**ft_create_tab_pos(int k, char ****tab_pos)
+static int	ft_get_pos(size_t j, size_t k, char ***tab, char ***coord)
 {
-	if (!((*tab_pos) = (char***)malloc(sizeof(char**) * k + 1)))
+	size_t	i;
+	size_t	sharp;
+
+	while (tab[k] != NULL)
+	{
+		sharp = 0;
+		j = 0;
+		while (tab[k][j] != 0)
+		{
+			i = 0;
+			while (tab[k][j][i] != 0)
+			{
+				if (tab[k][j][i] == '#')
+				{
+					coord[k][sharp][0] = (char)j;
+					coord[k][sharp][1] = (char)i;
+					printf("k : %zu -- j : %zu -- i : %zu\n", k, j, i);
+					sharp++;
+					i++;
+				}
+			}
+			j++;
+		}
+		k++;
+	}
+	return (0);
+}
+
+// size_t n dans ft_solve,
+
+int	ft_solve(char ***piece)
+{
+	size_t	j;
+	size_t	k;
+	char	***coord;
+	size_t	nb_piece;
+
+	j = 0;
+	k = 0;
+	nb_piece = 26;
+	coord = NULL;
+	// if (ft_create_map(n) == 1)
+	// 	return (1);
+	if (ft_create_coord(nb_piece, &coord) == 1)
 		return (1);
+	ft_get_pos(j, k, piece, coord);
 	return (0);
 }
-
-static int	**ft_get_sharp_pos(char ****tab_pos)
-{
-	ft_create_tab_pos(k, tab_pos);
-	//remplis le tableau précédemment créé
-	// faire une fonction qui te fait passer de ton tableau de pièces représentées par un tableau de lignes, à un tableau de pièces représentées par un tableau (de taille 4) de 2 entiers (correspondant aux coordonnées de ta pièce)
-	return (0);
-}
-
-
-int	*ft_solve(size_t n, char ****tab_pos)
-{
-	if (ft_create_map(n) == 1)
-		return (1);
-	ft_get_sharp_pos();
-	return (0);
-}
-
-// Alors, tu dois faire une fonction qui te fait passer de ton tableau de pièces représentées par un tableau de lignes, à un tableau de pièces représentées par un tableau (de taille 4) de 2 entiers (correspondant aux coordonnées de ta pièce)
-//
-// Pour ca, tu dois déjà faire une fonction qui le créée, qui prend en argument ton vrai nombre de pièces, et l'adresse où tu vas le créer, et qui retourne 0 si la création a été correcte, et 1 sinon.
-//
-// où tab_positions est l'adresse du tableau que tu vas créer (et donc tu modifies *tab_positions comme dans le read_file)
-//
-// int  ft_create_tab_pos(char ****tab_positions)
-// {
-// }
-//
-// Une fois créé, tu remplis ce tableau à partir du tab(validation). De sorte à récupérer chaque coordonnée de chaque dièse.
-//
-// int  ft_create_tab_pos(char ***tab_positions)
-// {
-// }
-//
-// Tu retournes 0 si tout c'est bien passé par exemple (que tu as bien eu 4 dièses par pièces, je sais pas encore)

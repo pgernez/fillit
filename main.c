@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	char	***piece;
-	size_t	n;
+	// size_t	n;
 
 	if (argc == 1)
 	{
@@ -32,8 +32,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (ft_input_check(piece) == 1)
 		return (1);
-	n = 4;
-	if (ft_solve(n, &piece) == 1)
+	// n = 4; + n dans ft_solve
+	if (ft_solve(piece) == 1)
 		return (1);
 	ft_print_tetritab(piece);
 	return (0);
