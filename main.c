@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:44:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/30 19:05:23 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/07/30 22:25:44 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	main(int argc, char **argv)
 	// n = 4; + n dans ft_solve
 	if (ft_preprocess(k, piece) == 1)
 		return (1);
+	if (ft_solve() == 0)
+		return (1)
 	ft_print_tetritab(piece);
 	return (0);
 }
