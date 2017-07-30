@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:44:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/03/12 19:35:13 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/07/30 19:05:23 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int	main(int argc, char **argv)
 {
 	char	***piece;
-	// size_t	n;
+	size_t	k;
 
+	// size_t	n;
 	if (argc == 1)
 	{
 		ft_putstr("File name missing\nusage: ./fillit tetriminos_file\n");
@@ -30,10 +31,10 @@ int	main(int argc, char **argv)
 	piece = NULL;
 	if (ft_open_read_close(argv, &piece) == 1)
 		return (1);
-	if (ft_input_check(piece) == 1)
+	if ((k = ft_input_check(piece)) > 26)
 		return (1);
 	// n = 4; + n dans ft_solve
-	if (ft_solve(piece) == 1)
+	if (ft_preprocess(k, piece) == 1)
 		return (1);
 	ft_print_tetritab(piece);
 	return (0);

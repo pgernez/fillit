@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 18:07:13 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/19 15:35:07 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/07/30 19:02:26 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_backslash_check(char ***tab)
 }
 
 /*
-**  ft_sharp_check returns 0 if we count 4 # in a piece or 1 if != 4
+**	ft_sharp_check returns 0 if we count 4 # in a piece or 1 if != 4
 */
 
 static int	ft_sharp_check(char ***tab)
@@ -77,8 +77,8 @@ static int	ft_sharp_check(char ***tab)
 }
 
 /*
-**  ft_dots_check returns 0 if the rest of the piece is filled with dots or 1
-**  if not.
+**	ft_dots_check returns 0 if the rest of the piece is filled with dots or 1
+**	if not.
 */
 
 static int	ft_dots_check(char ***tab)
@@ -111,58 +111,57 @@ static int	ft_dots_check(char ***tab)
 }
 
 /*
-**  ft_pattern_check returns 0 if the pattern is correct or 1 if not.
+**	ft_pattern_check returns 0 if the pattern is correct or 1 if not.
 */
 
-static int	ft_pattern_check(size_t k, size_t j, size_t i, char ***tab)
+static int	ft_pattern_check(char **tab)
 {
 	size_t	pattern;
+	size_t	j;
+	size_t	i;
 
-	while (tab[++k] != NULL)
+	pattern = 0;
+	j = 0;
+	while ((i = 0) || tab[j] != 0)
 	{
-		pattern = 0;
-		j = -1;
-		while (tab[k][++j] != 0)
+		while (tab[j][i] != 0)
 		{
-			i = -1;
-			while (tab[k][j][++i] != 0)
-			{
-				if (tab[k][j][i] == '#' && tab[k][j][i + 1] == '#')
-					pattern++;
-				if (tab[k][j][i] == '#' && tab[k][j][i - 1] == '#')
-					pattern++;
-				if (j != 0 && tab[k][j][i] == '#' && tab[k][j - 1][i] == '#')
-					pattern++;
-				if (j < 3 && tab[k][j][i] == '#' && tab[k][j + 1][i] == '#')
-					pattern++;
-			}
+			if (tab[j][i] == '#' && tab[j][i + 1] == '#')
+				pattern++;
+			if (tab[j][i] == '#' && tab[j][i - 1] == '#')
+				pattern++;
+			if (j != 0 && tab[j][i] == '#' && tab[j - 1][i] == '#')
+				pattern++;
+			if (j < 3 && tab[j][i] == '#' && tab[j + 1][i] == '#')
+				pattern++;
+			i++;
 		}
-		if (pattern != 6 && pattern != 8)
-			return (1);
+		j++;
 	}
+	if (pattern != 6 && pattern != 8)
+		return (1);
 	return (0);
 }
 
-int			ft_input_check(char ***tab)
+size_t		ft_input_check(char ***tab)
 {
-	size_t	i;
-	size_t	j;
 	size_t	k;
 
-	i = -1;
-	j = -1;
 	k = 0;
 	if (tab[k] == 0 || ft_backslash_check(tab) == 1
 		|| ft_sharp_check(tab) == 1 || ft_dots_check(tab) == 1)
 	{
 		ft_putstr("error\n");
-		return (1);
+		return (42);
 	}
-	k = -1;
-	if (ft_pattern_check(k, j, i, tab) == 1)
+	while (tab[k] != NULL)
 	{
-		ft_putstr("error\n");
-		return (1);
+		if (ft_pattern_check(tab[k]) == 1)
+		{
+			ft_putstr("error\n");
+			return (42);
+		}
+		k++;
 	}
-	return (0);
+	return (k);
 }
