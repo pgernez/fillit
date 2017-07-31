@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/26 19:32:35 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/30 23:08:55 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/07/31 14:21:32 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 # include <stdio.h>
 # include <string.h>
 
-typedef struct	s_carpet
-{
-	char		**map;
-	size_t		x;
-	size_t		y;
-}				t_carpet;
+// typedef struct	s_carpet
+// {
+// 	char		**map;
+// 	size_t		x;
+// 	size_t		y;
+// }				t_carpet;
 
 void	ft_putstr(char *str);
 int		ft_open_read_close(char **argv, char ****new);
