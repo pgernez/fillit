@@ -6,18 +6,42 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:44:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/31 15:37:06 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/01 23:31:04 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+/*
+**	ft_init_carpet initializes the carpet structure and allocates memory for
+**	the final map to solve. It returns 1 if the allocations fails and 0 in case
+**	of success.
+*/
+
+int	ft_init_full_map(char ***map, size_t size)
+{
+	size_t	line;
+
+	if (!((*map) = (char**)malloc(sizeof(char*) * (size + 1))))
+		return (1);
+	line = 0;
+	while (line < size)
+	{
+		if (!((*map)[line] = (char*)malloc(sizeof(char) * (size + 1))))
+			return (1);
+		ft_memset((void*)(*map)[line], '.', size);
+		(*map)[line][size] = 0;
+		line++;
+	}
+	(*map)[line] = NULL;
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
 	char	***piece;
 	size_t	k;
 
-	// size_t	n;
 	if (argc == 1)
 	{
 		ft_putstr("File name missing\nusage: ./fillit tetriminos_file\n");
@@ -33,11 +57,12 @@ int	main(int argc, char **argv)
 		return (1);
 	if ((k = ft_input_check(piece)) > 26)
 		return (1);
-	// n = 4; + n dans ft_solve
 	if (ft_preprocess(k, piece) == 1)
 		return (1);
-	// if (ft_solve(, k) == 0)
-	// 	return (1);
+	if (ft_init_full_map(map, size) == 1)
+		return (1);
+	if (ft_solve(, k) == 0)
+		return (1);
 	ft_print_tetritab(piece);
 	return (0);
 }
