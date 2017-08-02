@@ -3,17 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pgernez <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 15:37:56 by pgernez           #+#    #+#              #
-#    Updated: 2017/03/12 19:35:56 by pgernez          ###   ########.fr        #
+#    Updated: 2017/08/02 15:27:09 by pgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
 SOURCE = ft_putstr.c\
+		 ft_strlen.c\
+		 ft_memset.c\
 		 read_file.c\
+		 validation.c\
+		 preprocessing.c\
+		 put_upper_left.c\
+		 solver.c\
 		 print_table.c\
 		 main.c
 

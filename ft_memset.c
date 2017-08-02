@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 21:52:55 by pgernez           #+#    #+#             */
-/*   Updated: 2017/02/19 20:26:09 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/02 15:36:56 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
 
 void	*ft_memset(void *b, int c, size_t len)
 {

@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 14:24:48 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/01 23:30:10 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/02 19:55:05 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	ft_get_pos(size_t j, size_t k, char ***tab, char ***coord)
 	return (0);
 }
 
-int			ft_preprocess(size_t i, char ***piece)
+char		***ft_preprocess(size_t i, char ***piece)
 {
 	size_t	j;
 	size_t	k;
@@ -86,9 +86,9 @@ int			ft_preprocess(size_t i, char ***piece)
 	k = 0;
 	coord = NULL;
 	if (ft_create_coord(i, &coord) == 1)
-		return (1);
+		return (NULL);
 	ft_get_pos(j, k, piece, coord);
 	ft_up_left(coord);
 	ft_print_coord(coord);
-	return (0);
+	return (coord);
 }

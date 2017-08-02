@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 17:21:40 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/31 11:37:19 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/02 18:47:22 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			ft_up_left(char ***coord)
 	return (0);
 }
 
-void	ft_print_coord(char ***coord)
+void		ft_print_coord(char ***coord)
 {
 	size_t	k;
 	size_t	i;
