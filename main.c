@@ -55,15 +55,15 @@ int			ft_init_full_map(char ***map, size_t size)
 int			main(int argc, char **argv)
 {
 	size_t		k;
-	t_couple	*current;
-	// t_main		*var;
+	t_couple	current;
+	// t_main		var;
 	char		***piece;
 	char		**map;
 	char		***coord;
 	size_t		size;
 
 	ft_putstr("0. Coucou\n");
-	current = NULL;
+	//current = NULL;
 	map = NULL;
 	size = 5;
 	coord = NULL;
@@ -87,9 +87,17 @@ int			main(int argc, char **argv)
 	if (ft_init_full_map(&map, size) == 1)
 		return (1);
 	ft_putstr("4. Coucou\n");
-	if (ft_solve(map, coord, current, size) == 1)
+	current.x = 0;
+	current.y = k;
+	if (ft_solve(map, coord, &current, size) == 0)
 		return (1);
-	// ft_putstr("5. Coucou\n");
+	printf("J'ai trouvé une solution\n");
+	k = 0;
+	while (k < size)
+	{
+		ft_putstr(map[k++]);
+		write(1, "\n", 1);
+	}
 	ft_print_tetritab(piece);
 	return (0);
 }

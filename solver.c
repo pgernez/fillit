@@ -40,7 +40,7 @@ static int	ft_put_piece(char **map, t_couple *pt, char **cord, size_t size)
 	s = 0;
 	while (s < 4)
 	{
-		map[pt->x + (size_t)cord[s][0]][pt->y + (size_t)cord[s][1]] = s + 'A';
+		map[pt->x + (size_t)cord[s][0]][pt->y + (size_t)cord[s][1]] = '#';
 		s++;
 	}
 	return (1);
@@ -75,35 +75,30 @@ static int	ft_remove(char **map, t_couple *pt, char **coord)
 
 int			ft_solve(char **map, char ***coord, t_couple *current, size_t size)
 {
-	t_couple	*pt;
-	t_couple	*next_piece;
+	t_couple	pt;
+	t_couple	next_piece;
 
-	pt = NULL;
-	next_piece = NULL;
-	// pt->x = 0;
-	// current->x = 0;
-	ft_putstr("5. Coucou\n");
-	// if ((current->x) == 0 || (current->y) == 0)
-	// 	return (1);
+	pt.x = 0;
 	if ((current->x) == (current->y))
 		return (1);
-	ft_putstr("6. Coucou\n");
-	while (pt->x < size)
+	while (pt.x < size)
 	{
-		// pt->y = 0;
-		while (pt->y < size)
+		pt.y = 0;
+		while (pt.y < size)
 		{
-			if (ft_put_piece(map, pt, coord[current->x], size) == 1)
+		printf("Current piece : %zu at %zu %zu\n", current->x, pt.x, pt.y);
+		fflush(stdout);
+			if (ft_put_piece(map, &pt, coord[current->x], size) == 1)
 			{
-				next_piece->x = current->x + 1;
-				next_piece->y = current->y;
-				if (ft_solve(map, coord, next_piece, size) == 1)
+				next_piece.x = current->x + 1;
+				next_piece.y = current->y;
+				if (ft_solve(map, coord, &next_piece, size) == 1)
 					return (1);
-				ft_remove(map, pt, coord[current->x]);
+				ft_remove(map, &pt, coord[current->x]);
 			}
-			pt->y++;
+			pt.y++;
 		}
-		pt->x++;
+		pt.x++;
 	}
 	return (0);
 }
