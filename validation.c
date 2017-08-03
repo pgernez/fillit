@@ -6,17 +6,17 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 18:07:13 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/02 16:32:42 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/03 23:14:41 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
-**	ft_backslash_check returns 0 if there are 4 well-positionned \n or 1 if != 4
-**	or not at the end of a line.
+**	ft_backslash_check returns 0 if there are 4 well-positionned \n or 1 if
+**	!= 4 or not at the end of a line.
 **	printf("--- k : %zu -- j : %zu -- i : %zu -- pattern : %zu\n", k, j, i,
-**	pattern);
+**	pattern);s
 */
 
 static int	ft_backslash_check(char ***tab)
@@ -148,15 +148,10 @@ size_t		ft_input_check(char ***tab)
 	size_t	k;
 
 	k = 0;
-	if (tab[k] == 0 || ft_backslash_check(tab) == 1
-		|| ft_sharp_check(tab) == 1 || ft_dots_check(tab) == 1)
-	{
-		ft_putstr("error\n");
-		return (42);
-	}
 	while (tab[k] != NULL)
 	{
-		if (ft_pattern_check(tab[k]) == 1)
+		if (ft_backslash_check(tab) == 1 || ft_sharp_check(tab) == 1
+			|| ft_dots_check(tab) == 1 || ft_pattern_check(tab[k]) == 1)
 		{
 			ft_putstr("error\n");
 			return (42);

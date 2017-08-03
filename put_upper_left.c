@@ -6,11 +6,16 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 17:21:40 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/02 18:47:22 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/03 15:55:37 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+/*
+**	printf("--------- Pièce %zu --------\n", k);
+**	printf("line : %c col : %c\n", coord[k][i][0] + '0', coord[k][i][1] + '0');
+*/
 
 static int	ft_can_sub(char **coord, size_t col)
 {
@@ -64,12 +69,8 @@ void		ft_print_coord(char ***coord)
 	while (coord[k] != NULL)
 	{
 		i = 0;
-		printf("--------- Pièce %zu --------\n", k);
 		while (i < 4)
-		{
-			printf("line : %c col : %c\n", coord[k][i][0] + '0', coord[k][i][1] + '0');
 			i++;
-		}
 		k++;
 	}
 }

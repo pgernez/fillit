@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_table.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 11:45:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/25 10:25:06 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/03 18:02:28 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
 **	Cette fonction prend une chaine de caracteres str en argument et
 **	sur la sortie standard.
-**	Usage : ft_putstr(chaine de caractères)
 */
 
 static void	ft_print_piece(char **piece)

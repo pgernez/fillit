@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:44:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/02 19:58:18 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/03 23:55:09 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,76 +28,61 @@ static int	ft_manage_arg(int argc)
 }
 
 /*
-**	ft_init_carpet initializes the carpet structure and allocates memory for
+**	ft_init_full_map initializes the map and allocates memory for
 **	the final map to solve. It returns 1 if the allocations fails and 0 in case
 **	of success.
 */
 
-int			ft_init_full_map(char ***map, size_t size)
-{
-	size_t	line;
+// int			ft_init_full_map(char ***map, size_t size)
+// {
+// 	size_t	line;
+//
+// 	if (!((*map) = (char**)malloc(sizeof(char*) * (size + 1))))
+// 		return (1);
+// 	line = 0;
+// 	while (line < size)
+// 	{
+// 		if (!((*map)[line] = (char*)malloc(sizeof(char) * (size + 1))))
+// 			return (1);
+// 		ft_memset((void*)(*map)[line], '.', size);
+// 		(*map)[line][size] = 0;
+// 		line++;
+// 	}
+// 	(*map)[line] = NULL;
+// 	return (0);
+// }
 
-	if (!((*map) = (char**)malloc(sizeof(char*) * (size + 1))))
-		return (1);
-	line = 0;
-	while (line < size)
-	{
-		if (!((*map)[line] = (char*)malloc(sizeof(char) * (size + 1))))
-			return (1);
-		ft_memset((void*)(*map)[line], '.', size);
-		(*map)[line][size] = 0;
-		line++;
-	}
-	(*map)[line] = NULL;
-	return (0);
-}
+
 
 int			main(int argc, char **argv)
 {
-	size_t		k;
 	t_couple	current;
-	// t_main		var;
-	char		***piece;
-	char		**map;
-	char		***coord;
-	size_t		size;
+	t_main		var;
 
-	ft_putstr("0. Coucou\n");
-	//current = NULL;
-	map = NULL;
-	size = 5;
-	coord = NULL;
-	// var->map = 0;
-	// var->size = 26;
-	ft_putstr("0 bis. Coucou\n");
+	current.x = 0;
+	var.size = 5;
+	var.map = NULL;
+	var.coord = NULL;
 	if (ft_manage_arg(argc) == 1)
 		return (1);
-	// var->piece = NULL;
-	// open read_file prend (argv, &piece)
-	// var->piece = NULL;
-	if (ft_open_read_close(argv, &piece) == 1)
+	if (ft_open_read_close(argv, &var.piece) == 1)
 		return (1);
-	ft_putstr("1. Coucou\n");
-	if ((k = ft_input_check(piece)) > 26)
+	if ((current.y = ft_input_check(var.piece)) > 26)
 		return (1);
-	ft_putstr("2. Coucou\n");
-	if ((coord = ft_preprocess(k, piece)) == NULL)
+	if ((var.coord = ft_preprocess(current.y, var.piece)) == NULL)
 		return (1);
-	ft_putstr("3. Coucou\n");
-	if (ft_init_full_map(&map, size) == 1)
-		return (1);
-	ft_putstr("4. Coucou\n");
+	// if (ft_init_full_map(&var.map, var.size) == 1)
+	// 	return (1);
+	// if (ft_solve(var.map, var.coord, &current, var.size) == 0)
+	// 	return (1);
+	ft_find_smallest_size(&var, &current);
+	ft_putstr("J'ai trouvé une solution\n");
 	current.x = 0;
-	current.y = k;
-	if (ft_solve(map, coord, &current, size) == 0)
-		return (1);
-	printf("J'ai trouvé une solution\n");
-	k = 0;
-	while (k < size)
+	while (current.x < var.size)
 	{
-		ft_putstr(map[k++]);
+		ft_putstr(var.map[current.x++]);
 		write(1, "\n", 1);
 	}
-	ft_print_tetritab(piece);
+	ft_print_tetritab(var.piece);
 	return (0);
 }

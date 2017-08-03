@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 14:24:48 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/02 19:55:05 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/03 23:13:13 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@ static int	ft_create_coord(size_t nb_piece, char ****coord)
 	while (k < nb_piece)
 	{
 		j = 0;
-		if (!((*coord)[k] = (char**)malloc(sizeof(char*) * 4)))
+		if (!((*coord)[k] = (char**)malloc(sizeof(char*) * 5)))
 			return (1);
-		while (j < 4)
+		while (j < 5)
 		{
 			if (!((*coord)[k][j] = (char*)malloc(sizeof(char) * 2)))
 				return (1);
 			j++;
 		}
+		ft_memset((*coord)[k][4], k + 'A', 1);
 		k++;
 	}
 	return (0);
