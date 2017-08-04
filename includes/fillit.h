@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/26 19:32:35 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/03 23:55:26 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/04 16:34:16 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ typedef struct	s_main
 void			ft_putstr(char *str);
 size_t			ft_strlen(char *str);
 void			*ft_memset(void *b, int c, size_t len);
+void			*ft_memmove(void *dst, const void *src, size_t len);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
 int				ft_open_read_close(char **argv, char ****new);
 size_t			ft_input_check(char ***tab);
 char			***ft_preprocess(size_t k, char ***piece);
 int				ft_up_left(char ***coord);
 void			ft_print_coord(char ***coord);
 int				ft_init_full_map(char ***map, size_t size);
-// int				ft_solve(char **map, char ***coord, t_couple *current,\
-// 				size_t size);
 int				ft_find_smallest_size(t_main *var, t_couple *current);
 void			ft_print_tetritab(char ***tab);
 

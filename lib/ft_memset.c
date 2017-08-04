@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/09 15:41:11 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/09 16:52:02 by pgernez          ###   ########.fr       */
+/*   Created: 2017/01/06 21:52:55 by pgernez           #+#    #+#             */
+/*   Updated: 2017/08/04 16:31:02 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
-size_t	ft_strlen(char *str)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	size_t	len;
+	char	*tmp;
+	size_t	k;
 
-	len = 0;
-	if (str[len] == 0)
-		return ('0');
-	while (str[len] != 0)
-		len++;
-	return (len);
+	k = 0;
+	tmp = (char*)b;
+	if (b == NULL && len == 0)
+		return (NULL);
+	while (k < len)
+	{
+		tmp[k] = (unsigned char)c;
+		k++;
+	}
+	return (b);
 }

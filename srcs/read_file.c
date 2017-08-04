@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 19:30:31 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/03 23:05:14 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/04 16:45:21 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,6 @@ static int	ft_create_piecetab(char ****new)
 	}
 	return (0);
 }
-
-/*
-**
-**
-**
-**
-*/
 
 static int	ft_read_file(int fd, size_t j, size_t k, char ****new)
 {

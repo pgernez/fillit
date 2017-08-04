@@ -6,29 +6,30 @@
 #    By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 15:37:56 by pgernez           #+#    #+#              #
-#    Updated: 2017/08/02 15:27:09 by pgernez          ###   ########.fr        #
+#    Updated: 2017/08/04 16:43:07 by pgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
-SOURCE = ft_putstr.c\
-		 ft_strlen.c\
-		 ft_memset.c\
-		 read_file.c\
-		 validation.c\
-		 preprocessing.c\
-		 put_upper_left.c\
-		 solver.c\
-		 print_table.c\
-		 main.c
+SOURCE = lib/ft_putstr.c\
+		 lib/ft_strlen.c\
+		 lib/ft_memset.c\
+		 lib/ft_memmove.c\
+		 lib/ft_memcpy.c\
+		 srcs/read_file.c\
+		 srcs/validation.c\
+		 srcs/preprocessing.c\
+		 srcs/put_upper_left.c\
+		 srcs/solver.c\
+		 srcs/main.c\
 
 SOURCE_O = $(SOURCE:.c=.o)
 
 all: $(NAME)
 
 $(NAME):
-	gcc -o $(NAME) -Wall -Wextra -Werror $(SOURCE)
+	gcc -o $(NAME) -Wall -Wextra -Werror -I includes/ $(SOURCE)
 
 %.o: %.c
 	$(NAME)

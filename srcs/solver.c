@@ -6,30 +6,11 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 15:56:10 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/04 00:04:30 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/04 16:48:33 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-int			ft_init_full_map(char ***map, size_t size)
-{
-	size_t	line;
-
-	if (!((*map) = (malloc(sizeof(char*) * (size + 1)))))
-		return (1);
-	line = 0;
-	while (line < size)
-	{
-		if (!((*map)[line] = (char*)malloc(sizeof(char) * (size + 1))))
-			return (1);
-		ft_memset((void*)(*map)[line], '.', size);
-		(*map)[line][size] = 0;
-		line++;
-	}
-	(*map)[line] = NULL;
-	return (0);
-}
 
 /*
 **	ft_put_piece puts a piece on the map. It returns 1 in case of success and 0
@@ -44,8 +25,6 @@ int			ft_init_full_map(char ***map, size_t size)
 **		printf("Current piece : %zu at %zu %zu\n", current->x, pt.x, pt.y);
 **		fflush(stdout);
 */
-
-
 
 static int	ft_put_piece(char **map, t_couple *pt, char **coord, size_t size)
 {
@@ -127,8 +106,6 @@ static int	ft_solve(char **map, char ***coord, t_couple *current, size_t size)
 	return (0);
 }
 
-#include <string.h>
-
 static int	ft_tab_copy(char **src, char ***dst, size_t size)
 {
 	size_t	i;
@@ -138,7 +115,7 @@ static int	ft_tab_copy(char **src, char ***dst, size_t size)
 	while (i < size)
 	{
 		(*dst)[i] = (char *)malloc(sizeof(char) * (size + 1));
-		memmove((*dst)[i], src[i], size + 1);
+		ft_memmove((*dst)[i], src[i], size + 1);
 		i++;
 	}
 	(*dst)[i] = NULL;

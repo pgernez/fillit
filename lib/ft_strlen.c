@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgernez <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/16 18:53:30 by pgernez           #+#    #+#             */
-/*   Updated: 2017/07/25 10:23:51 by pgernez          ###   ########.fr       */
+/*   Created: 2017/07/09 15:41:11 by pgernez           #+#    #+#             */
+/*   Updated: 2017/08/04 16:31:09 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
-void	ft_putstr(char *str)
+size_t	ft_strlen(char *str)
 {
-	size_t	k;
+	size_t	len;
 
-	k = 0;
-	while (str[k] != 0)
-	{
-		write(1, &str[k], 1);
-		k++;
-	}
+	len = 0;
+	if (str[len] == 0)
+		return ('0');
+	while (str[len] != 0)
+		len++;
+	return (len);
 }
