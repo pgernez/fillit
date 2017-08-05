@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 11:45:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/04 16:41:08 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/05 18:54:49 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,19 @@ void		ft_print_tetritab(char ***tetritab)
 		i++;
 	}
 }
+
+
+// void		ft_print_coord(char ***coord)
+// {
+// 	size_t	k;
+// 	size_t	i;
+//
+// 	k = 0;
+// 	while (coord[k] != NULL)
+// 	{
+// 		i = 0;
+// 		while (i < 4)
+// 			i++;
+// 		k++;
+// 	}
+// }

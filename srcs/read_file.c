@@ -6,18 +6,18 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 19:30:31 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/04 16:45:21 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/05 19:10:53 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
-**	introduire dans read_file un compteur des pieces.
-**	malloc avec le nombre de pieces
-**	quand read : tous les 4\n, compter une piece.
-**	printf("-------- Lu et stocké à k : %zu -- i : %zu\n|%s|\n -- len : %zu\n",
-**	k, i, (*new)[k][i], strlen((*new)[k][i]));
+**	ft_create_piecetab allocates memory for the pieces as described in the
+**	entry file.
+**	First for the whole tab, then for the pieces (every 5 lines including the
+**	last \n) and for every char (including the final \0).
+**	ft_memset is refered to init the tab.
 */
 
 static int	ft_create_piecetab(char ****new)
@@ -44,6 +44,15 @@ static int	ft_create_piecetab(char ****new)
 	}
 	return (0);
 }
+
+/*
+**	ft_read_file read the file and alternates the step between 1 and 5 to
+**	evacuate extra \n.
+**	Size_t length_piece is used to avoid segmentation faults from misplaced
+**	\0 in the description file.
+**	It - sadly - takes 2 size_t as parameters to stick to the Norm.
+**	It returns 0 in case of success and 0 if not.
+*/
 
 static int	ft_read_file(int fd, size_t j, size_t k, char ****new)
 {
@@ -73,6 +82,15 @@ static int	ft_read_file(int fd, size_t j, size_t k, char ****new)
 	(*new)[k] = NULL;
 	return (0);
 }
+
+/*
+**	ft_open_read_close is a function managing the reading part of the
+**	programme.
+**	It refers to the previous static functions and put an 'error' message if
+**	any action failed. Char ****new allows us to stock the bytes of the
+**	description file.
+**	It returns 0 in case of success and 1 if not.
+*/
 
 int			ft_open_read_close(char **argv, char ****new)
 {

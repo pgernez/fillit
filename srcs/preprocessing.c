@@ -6,21 +6,17 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 14:24:48 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/03 23:13:13 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/05 18:57:05 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
-**	1. Malloc mon tapis : ft_create_map
-**	2. Malloc un tableau pouvant stocker des tableaux de 4 tableaux de 2 ints
-**	(4 tableaux de 2 ints = 1 pièce)
-**	3. Stocker par 4 tableaux de 2 ints
-**	4. Coordonnées
-**	printf(" coord j | coord i\n");
-**	printf("j : %c  | i : %c\n", coord[k][sharp][0] + '0', coord[k]
-**	[sharp][1] + '0');
+**	ft_create_coord allocates memory for the tables of coordinates. The 5th
+**	line aims at stocking the letter thanks to ft_memset, allowing us to use it
+**	later for the solving part. It returns 1 if the allocation fails and 0
+**	otherwise.
 */
 
 static int	ft_create_coord(size_t nb_piece, char ****coord)
@@ -47,6 +43,11 @@ static int	ft_create_coord(size_t nb_piece, char ****coord)
 	}
 	return (0);
 }
+
+/*
+**	ft_get_pos stocks couples of coordinates in coord. It - sadly - takes 2
+**	size_t as parameters to stick to the Norm.
+*/
 
 static int	ft_get_pos(size_t j, size_t k, char ***tab, char ***coord)
 {
@@ -77,6 +78,17 @@ static int	ft_get_pos(size_t j, size_t k, char ***tab, char ***coord)
 	return (0);
 }
 
+/*
+**	ft_preprocess is a function managing the preprocessing part of the
+**	programme. Size_t i stands for the number of pieces as counted earlier in
+**	the validation part.
+**	First it refers to ft_create_coord - allocating memory for couples of
+**	coordinates tables. Then it refers to ft_get_pos - getting coordinates
+**	positions and stocking it in coord -. The function then refers to
+**	put_upper_left.c. See you there ;).
+**	The function returns coord.
+*/
+
 char		***ft_preprocess(size_t i, char ***piece)
 {
 	size_t	j;
@@ -90,6 +102,5 @@ char		***ft_preprocess(size_t i, char ***piece)
 		return (NULL);
 	ft_get_pos(j, k, piece, coord);
 	ft_up_left(coord);
-	ft_print_coord(coord);
 	return (coord);
 }

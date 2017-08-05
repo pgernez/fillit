@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:44:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/04 16:50:19 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/05 18:02:40 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			main(int argc, char **argv)
 	t_main		var;
 
 	current.x = 0;
-	var.size = 5;
+	var.size = 30;
 	var.map = NULL;
 	var.coord = NULL;
 	if (ft_manage_arg(argc) == 1)

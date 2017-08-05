@@ -6,15 +6,16 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 17:21:40 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/03 15:55:37 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/05 18:56:48 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
-**	printf("--------- Pièce %zu --------\n", k);
-**	printf("line : %c col : %c\n", coord[k][i][0] + '0', coord[k][i][1] + '0');
+**	The 2 following static functions are quite explicit. They check whether if
+**	a piece can be placed in the upper left corner or not ; and do it
+**	accordingly.
 */
 
 static int	ft_can_sub(char **coord, size_t col)
@@ -44,6 +45,12 @@ static int	ft_sub(char **coord, size_t col)
 	return (0);
 }
 
+/*
+**	ft_up_left is a function managing the end of the preprocessing part of the
+**	programme, e.g. putting a piece in the upper left corner if needed.
+**	It returns 0 if everything went well.
+*/
+
 int			ft_up_left(char ***coord)
 {
 	size_t	k;
@@ -58,19 +65,4 @@ int			ft_up_left(char ***coord)
 		k++;
 	}
 	return (0);
-}
-
-void		ft_print_coord(char ***coord)
-{
-	size_t	k;
-	size_t	i;
-
-	k = 0;
-	while (coord[k] != NULL)
-	{
-		i = 0;
-		while (i < 4)
-			i++;
-		k++;
-	}
 }

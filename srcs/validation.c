@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 18:07:13 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/03 23:14:41 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/05 18:57:29 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 /*
 **	ft_backslash_check returns 0 if there are 4 well-positionned \n or 1 if
 **	!= 4 or not at the end of a line.
-**	printf("--- k : %zu -- j : %zu -- i : %zu -- pattern : %zu\n", k, j, i,
-**	pattern);s
 */
 
 static int	ft_backslash_check(char ***tab)
@@ -142,6 +140,14 @@ static int	ft_pattern_check(char **tab)
 		return (1);
 	return (0);
 }
+
+/*
+**	ft_input_check is a function managing the validation part of the
+**	programme. The char*** stands for the table that stocks the pieces of the
+**	description file.
+**	The function returns the number of pieces of the description file if
+**	everything went well or an 'error' message if not.
+*/
 
 size_t		ft_input_check(char ***tab)
 {
