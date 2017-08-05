@@ -6,7 +6,7 @@
 #    By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 15:37:56 by pgernez           #+#    #+#              #
-#    Updated: 2017/08/04 16:43:07 by pgernez          ###   ########.fr        #
+#    Updated: 2017/08/06 00:20:57 by pgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SOURCE = lib/ft_putstr.c\
 		 lib/ft_memset.c\
 		 lib/ft_memmove.c\
 		 lib/ft_memcpy.c\
+		 lib/ft_strncmp.c\
 		 srcs/read_file.c\
 		 srcs/validation.c\
 		 srcs/preprocessing.c\
@@ -28,16 +29,16 @@ SOURCE_O = $(SOURCE:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
-	gcc -o $(NAME) -Wall -Wextra -Werror -I includes/ $(SOURCE)
+$(NAME): $(SOURCE_O)
+	gcc  $(SOURCE_O) -o $@
 
 %.o: %.c
-	$(NAME)
+	gcc -Wall -Wextra -Werror -I includes/ -c $< -o $@
 
 clean:
 	/bin/rm -f $(SOURCE_O)
 
 fclean: clean
-	/bin/rm $(NAME)
+	/bin/rm -f $(NAME)
 
-re: all fclean
+re: fclean all

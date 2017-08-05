@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 15:56:10 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/05 18:57:20 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 00:43:22 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,9 @@
 **	if we cannot.
 **	The first part of the function tells us if we can put a piece (the # are on
 **	the map && do not cover another piece), the second part puts a piece.
-**
-**	nb : ft_can_put also converts # in letters according to their position in
-**	the pieces list.
+**	The 2 last lines stocks in the last lines of our table of coordinates the
+**	position of the current piece in the map.
 **	nb : ne pas calculer la taille de la map à chaque fois
-**	ne pas envoyer avant la dernière pièce identique
-**		printf("Current piece : %zu at %zu %zu\n", current->x, pt.x, pt.y);
-**		fflush(stdout);
 */
 
 static int	ft_put_piece(char **map, t_couple *pt, char **coord, size_t size)
@@ -48,6 +44,8 @@ static int	ft_put_piece(char **map, t_couple *pt, char **coord, size_t size)
 		[pt->y + (size_t)coord[s][1]] = coord[4][0];
 		s++;
 	}
+	coord[6][0] = pt->x;
+	coord[6][1] = pt->y;
 	return (1);
 }
 
@@ -76,6 +74,7 @@ static int	ft_remove(char **map, t_couple *pt, char **coord)
 **	pieces, so that current->x == current->y means we placed all the pieces.
 **	The t_couple *pt stands for the piece couple of coordinates.
 **	The t_couple *next_piece stands for the next_piece couple of coordinates.
+**	coord[current->x][5][0] = index of previous piece with the same pattern
 */
 
 static int	ft_solve(char **map, char ***coord, t_couple *current, size_t size)
@@ -83,12 +82,12 @@ static int	ft_solve(char **map, char ***coord, t_couple *current, size_t size)
 	t_couple	pt;
 	t_couple	next_piece;
 
-	pt.x = 0;
+	pt.x = (size_t)coord[0][6][0] % size;
 	if ((current->x) == (current->y))
 		return (1);
+	pt.y = (size_t)coord[0][6][1] % size;
 	while (pt.x < size)
 	{
-		pt.y = 0;
 		while (pt.y < size)
 		{
 			if (ft_put_piece(map, &pt, coord[current->x], size) == 1)
@@ -101,6 +100,7 @@ static int	ft_solve(char **map, char ***coord, t_couple *current, size_t size)
 			}
 			pt.y++;
 		}
+		pt.y = 0;
 		pt.x++;
 	}
 	return (0);

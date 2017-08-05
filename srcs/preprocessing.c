@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 14:24:48 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/05 18:57:05 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 00:33:29 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 /*
 **	ft_create_coord allocates memory for the tables of coordinates. The 5th
-**	line aims at stocking the letter thanks to ft_memset, allowing us to use it
+**	line aims at stocking the letter, allowing us to use it
 **	later for the solving part. It returns 1 if the allocation fails and 0
 **	otherwise.
+**	coord[k][0] = coordinates of #0
+**	coord[k][1] = coordinates of #1
+**	coord[k][2] = coordinates of #2
+**	coord[k][3] = coordinates of #3
+**	coord[k][4][0] = letter
+**	coord[k][5][0] = index of the previous same piece
+**	coord[k][6] = position of the current piece (coord[k][6][0 / 1] = x / y)
 */
 
 static int	ft_create_coord(size_t nb_piece, char ****coord)
@@ -30,15 +37,18 @@ static int	ft_create_coord(size_t nb_piece, char ****coord)
 	while (k < nb_piece)
 	{
 		j = 0;
-		if (!((*coord)[k] = (char**)malloc(sizeof(char*) * 5)))
+		if (!((*coord)[k] = (char**)malloc(sizeof(char*) * 7)))
 			return (1);
-		while (j < 5)
+		while (j < 7)
 		{
 			if (!((*coord)[k][j] = (char*)malloc(sizeof(char) * 2)))
 				return (1);
 			j++;
 		}
-		ft_memset((*coord)[k][4], k + 'A', 1);
+		(*coord)[k][4][0] = 'A' + k;
+		(*coord)[k][5][0] = k;
+		(*coord)[k][6][0] = 0;
+		(*coord)[k][6][1] = 0;
 		k++;
 	}
 	return (0);
@@ -78,6 +88,40 @@ static int	ft_get_pos(size_t j, size_t k, char ***tab, char ***coord)
 	return (0);
 }
 
+static int	ft_piececmp(char **coord1, char **coord2)
+{
+	size_t	sharp;
+
+	sharp = 0;
+	while (sharp < 4)
+	{
+		if (ft_strncmp(coord1[sharp], coord2[sharp], 2))
+			return (0);
+		sharp++;
+	}
+	return (1);
+}
+
+static int	ft_connect(char ***coord)
+{
+	size_t	forward;
+	int		backward;
+
+	forward = 0;
+	while (coord[forward] != NULL)
+	{
+		backward = (int)(forward - 1);
+		while (backward >= 0)
+		{
+			if (ft_piececmp(coord[forward], coord[(size_t)backward]) == 1)
+				coord[forward][5][0] = (char)backward;
+			backward--;
+		}
+		forward++;
+	}
+	return (0);
+}
+
 /*
 **	ft_preprocess is a function managing the preprocessing part of the
 **	programme. Size_t i stands for the number of pieces as counted earlier in
@@ -101,6 +145,7 @@ char		***ft_preprocess(size_t i, char ***piece)
 	if (ft_create_coord(i, &coord) == 1)
 		return (NULL);
 	ft_get_pos(j, k, piece, coord);
+	ft_connect(coord);
 	ft_up_left(coord);
 	return (coord);
 }
