@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/26 19:32:35 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 00:21:35 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 15:01:58 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,7 @@ typedef struct		s_main
 	size_t			size;
 }					t_main;
 
-typedef struct		s_list
-{
-	//list0
-	struct s_list	*next;
-}					t_list;
-
 void				ft_putstr(char *str);
-size_t				ft_strlen(char *str);
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memcpy(void *dst, const void *src, size_t n);

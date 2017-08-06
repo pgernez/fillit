@@ -6,14 +6,13 @@
 #    By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 15:37:56 by pgernez           #+#    #+#              #
-#    Updated: 2017/08/06 00:20:57 by pgernez          ###   ########.fr        #
+#    Updated: 2017/08/06 17:08:53 by pgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
 SOURCE = lib/ft_putstr.c\
-		 lib/ft_strlen.c\
 		 lib/ft_memset.c\
 		 lib/ft_memmove.c\
 		 lib/ft_memcpy.c\
@@ -25,18 +24,22 @@ SOURCE = lib/ft_putstr.c\
 		 srcs/solver.c\
 		 srcs/main.c\
 
-SOURCE_O = $(SOURCE:.c=.o)
+OBJ_NAME = $(SOURCE:.c=.o)
+
+CFLAGS = -Werror -Wall -Wextra
+
+CPPFLAGS = -Iinclude
 
 all: $(NAME)
 
-$(NAME): $(SOURCE_O)
-	gcc  $(SOURCE_O) -o $@
+$(NAME): $(OBJ_NAME)
+	gcc  $(OBJ_NAME) -o $@
 
 %.o: %.c
-	gcc -Wall -Wextra -Werror -I includes/ -c $< -o $@
+	gcc $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	/bin/rm -f $(SOURCE_O)
+	/bin/rm -f $(OBJ_NAME)
 
 fclean: clean
 	/bin/rm -f $(NAME)

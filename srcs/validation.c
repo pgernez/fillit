@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 18:07:13 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/05 18:57:29 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 15:48:29 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,11 @@ size_t		ft_input_check(char ***tab)
 			return (42);
 		}
 		k++;
+	}
+	if (k == 0)
+	{
+		ft_putstr("error\n");
+		return (42);
 	}
 	return (k);
 }

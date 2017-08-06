@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 14:24:48 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 00:33:29 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 16:36:06 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	ft_create_coord(size_t nb_piece, char ****coord)
 			j++;
 		}
 		(*coord)[k][4][0] = 'A' + k;
-		(*coord)[k][5][0] = k;
+		(*coord)[k][5][0] = (char)k;
 		(*coord)[k][6][0] = 0;
 		(*coord)[k][6][1] = 0;
 		k++;
@@ -114,7 +114,10 @@ static int	ft_connect(char ***coord)
 		while (backward >= 0)
 		{
 			if (ft_piececmp(coord[forward], coord[(size_t)backward]) == 1)
+			{
 				coord[forward][5][0] = (char)backward;
+				break ;
+			}
 			backward--;
 		}
 		forward++;

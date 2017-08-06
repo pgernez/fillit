@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 15:56:10 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 00:43:22 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 16:35:55 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,20 @@
 **	The first part of the function tells us if we can put a piece (the # are on
 **	the map && do not cover another piece), the second part puts a piece.
 **	The 2 last lines stocks in the last lines of our table of coordinates the
-**	position of the current piece in the map.
-**	nb : ne pas calculer la taille de la map à chaque fois
+**	position of the fresh dropped piece in the map.
 */
 
-static int	ft_put_piece(char **map, t_couple *pt, char **coord, size_t size)
+static int	ft_put_piece(char **map, t_couple pt, char **coord, size_t size)
 {
 	size_t	s;
 
 	s = 0;
 	while (s < 4)
 	{
-		if ((pt->x + coord[s][0]) >= size || (pt->y + coord[s][1]) >= size)
+		if ((pt.x + coord[s][0]) >= size || (pt.y + coord[s][1]) >= size)
 			return (0);
-		if (map[pt->x + (size_t)coord[s][0]]
-			[pt->y + (size_t)coord[s][1]] != '.')
+		if (map[pt.x + (size_t)coord[s][0]]
+			[pt.y + (size_t)coord[s][1]] != '.')
 			return (0);
 		s++;
 	}
@@ -40,12 +39,12 @@ static int	ft_put_piece(char **map, t_couple *pt, char **coord, size_t size)
 	while (s < 4)
 	{
 		map
-		[pt->x + (size_t)coord[s][0]]
-		[pt->y + (size_t)coord[s][1]] = coord[4][0];
+		[pt.x + (size_t)coord[s][0]]
+		[pt.y + (size_t)coord[s][1]] = coord[4][0];
 		s++;
 	}
-	coord[6][0] = pt->x;
-	coord[6][1] = pt->y;
+	coord[6][0] = pt.x;
+	coord[6][1] = pt.y;
 	return (1);
 }
 
@@ -54,14 +53,14 @@ static int	ft_put_piece(char **map, t_couple *pt, char **coord, size_t size)
 **	'.'. It returns 1 in case of success.
 */
 
-static int	ft_remove(char **map, t_couple *pt, char **coord)
+static int	ft_remove(char **map, t_couple pt, char **coord)
 {
 	size_t	s;
 
 	s = 0;
 	while (s < 4)
 	{
-		map[pt->x + (size_t)coord[s][0]][pt->y + (size_t)coord[s][1]] = '.';
+		map[pt.x + (size_t)coord[s][0]][pt.y + (size_t)coord[s][1]] = '.';
 		s++;
 	}
 	return (1);
@@ -82,21 +81,25 @@ static int	ft_solve(char **map, char ***coord, t_couple *current, size_t size)
 	t_couple	pt;
 	t_couple	next_piece;
 
-	pt.x = (size_t)coord[0][6][0] % size;
+	// pt.x = (size_t)coord[(size_t)coord[current->x][5][0]][6][0];
+	// printf("pt.x : %zu -- cur : %zu previous : %d\n", pt.x, current->x, coord[current->x][5][0]);
+	pt.x = 0;
 	if ((current->x) == (current->y))
 		return (1);
-	pt.y = (size_t)coord[0][6][1] % size;
+	// pt.y = (size_t)coord[(size_t)coord[current->x][5][0]][6][1];
+	pt.y = 0;
+	// printf("pt.y : %zu -- cur : %zu previous : %d\n", pt.y, current->x, coord[current->x][5][0]);
 	while (pt.x < size)
 	{
 		while (pt.y < size)
 		{
-			if (ft_put_piece(map, &pt, coord[current->x], size) == 1)
+			if (ft_put_piece(map, pt, coord[current->x], size) == 1)
 			{
 				next_piece.x = current->x + 1;
 				next_piece.y = current->y;
 				if (ft_solve(map, coord, &next_piece, size) == 1)
 					return (1);
-				ft_remove(map, &pt, coord[current->x]);
+				ft_remove(map, pt, coord[current->x]);
 			}
 			pt.y++;
 		}
@@ -108,7 +111,7 @@ static int	ft_solve(char **map, char ***coord, t_couple *current, size_t size)
 
 /*
 **	ft_tab_copy uses ft_memmove to make a copy of the solving map that will be
-**	used if a solution is found.
+**	used if a solution is found (e.g. we copy carpet in map).
 */
 
 static int	ft_tab_copy(char **src, char ***dst, size_t size)
@@ -133,7 +136,7 @@ static int	ft_tab_copy(char **src, char ***dst, size_t size)
 **	we use here the solving map and the table of the pieces coordinates. The
 **	t_couple *current is a pointer pointing to a couple of size_t, where x
 **	stands for our current piece and y stands for the total number of pieces.
-**	Char **carpet is the definitive map.
+**	Char **carpet is the map we try to solve.
 **	The function returns 0 in case of success and 1 if not.
 */
 

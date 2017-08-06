@@ -6,11 +6,11 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 22:35:31 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/04 16:30:51 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 16:40:27 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "../include/fillit.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

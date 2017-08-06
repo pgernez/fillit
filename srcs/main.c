@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:44:46 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/05 19:39:16 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 15:33:17 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,21 @@ int			ft_init_full_map(char ***map, size_t size)
 	return (0);
 }
 
+static void	ft_write_map(t_main var, t_couple current)
+{
+	while (current.x < var.size)
+	{
+		ft_putstr(var.map[current.x++]);
+		write(1, "\n", 1);
+	}
+}
+
 int			main(int argc, char **argv)
 {
 	t_couple	current;
 	t_main		var;
 
 	current.x = 0;
-	var.size = 30;
 	var.map = NULL;
 	var.coord = NULL;
 	if (ft_manage_arg(argc) == 1)
@@ -71,10 +79,6 @@ int			main(int argc, char **argv)
 		return (1);
 	ft_find_smallest_size(&var, &current);
 	current.x = 0;
-	while (current.x < var.size)
-	{
-		ft_putstr(var.map[current.x++]);
-		write(1, "\n", 1);
-	}
+	ft_write_map(var, current);
 	return (0);
 }

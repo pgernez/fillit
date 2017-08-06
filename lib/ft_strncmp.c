@@ -6,11 +6,11 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/24 11:30:21 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 00:20:19 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 16:40:45 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "../include/fillit.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

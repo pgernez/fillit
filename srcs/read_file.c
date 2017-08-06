@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 19:30:31 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/05 23:32:28 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/06 17:11:22 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ static int	ft_read_file(int fd, size_t j, size_t k, char ****new)
 int			ft_open_read_close(char **argv, char ****new)
 {
 	int		fd;
-	size_t	k;
-	size_t	j;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
@@ -106,9 +104,7 @@ int			ft_open_read_close(char **argv, char ****new)
 		ft_putstr("error\n");
 		return (1);
 	}
-	j = 0;
-	k = 0;
-	if (ft_read_file(fd, j, k, new) == 1 || close(fd) == -1)
+	if (ft_read_file(fd, 0, 0, new) == 1 || close(fd) == -1)
 	{
 		ft_putstr("error\n");
 		return (1);
