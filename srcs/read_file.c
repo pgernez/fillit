@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 19:30:31 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 17:11:22 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/08 14:56:20 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ static int	ft_create_piecetab(char ****new)
 **	evacuate extra \n.
 **	Size_t length_piece is used to avoid segmentation faults from misplaced
 **	\0 in the description file.
-**	It - sadly - takes 2 size_t as parameters to stick to the Norm.
-**	It returns 0 in case of success and 0 if not.
+**	This line 'if (step == 1 && (*new)[k][j][0] != '\n')' is used to avoid
+**	segfaults when two pieces are separated by a random char (!= 'ln'). The
+**	ternary operator then establishes whether we need to increment or init j.
+**	It returns 0 in case of success and 0 otherwise.
 */
 
 static int	ft_read_file(int fd, size_t j, size_t k, char ****new)
@@ -65,10 +67,10 @@ static int	ft_read_file(int fd, size_t j, size_t k, char ****new)
 	while ((ret = read(fd, (*new)[k][j], step)) > 0 && k < 26)
 	{
 		length_piece += ret;
-		if (j == 0 && step == 1)
-			j = 0;
+		if (step == 1 && (*new)[k][j][0] != '\n')
+			return (1);
 		else
-			j++;
+			j = (step == 1) ? 0 : j + 1;
 		step = 5;
 		if (j == 4 && (step = 1))
 		{
@@ -89,7 +91,7 @@ static int	ft_read_file(int fd, size_t j, size_t k, char ****new)
 **	It refers to the previous static functions and put an 'error' message if
 **	any action failed. Char ****new allows us to stock the bytes of the
 **	description file.
-**	It returns 0 in case of success and 1 if not.
+**	It returns 0 in case of success and 1 otherwise.
 */
 
 int			ft_open_read_close(char **argv, char ****new)
@@ -98,7 +100,10 @@ int			ft_open_read_close(char **argv, char ****new)
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
+	{
+		ft_putstr("error\n");
 		return (1);
+	}
 	if (ft_create_piecetab(new) == 1)
 	{
 		ft_putstr("error\n");

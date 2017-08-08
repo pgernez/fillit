@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 15:56:10 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 16:35:55 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/08 14:59:14 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	ft_put_piece(char **map, t_couple pt, char **coord, size_t size)
 
 /*
 **	ft_remove removes a piece from the map, meaning replacing the letter by a
-**	'.'. It returns 1 in case of success.
+**	'.', and reinit coord[6] to 0. It returns 1 in case of success.
 */
 
 static int	ft_remove(char **map, t_couple pt, char **coord)
@@ -63,6 +63,8 @@ static int	ft_remove(char **map, t_couple pt, char **coord)
 		map[pt.x + (size_t)coord[s][0]][pt.y + (size_t)coord[s][1]] = '.';
 		s++;
 	}
+	coord[6][0] = 0;
+	coord[6][1] = 0;
 	return (1);
 }
 
@@ -73,7 +75,7 @@ static int	ft_remove(char **map, t_couple pt, char **coord)
 **	pieces, so that current->x == current->y means we placed all the pieces.
 **	The t_couple *pt stands for the piece couple of coordinates.
 **	The t_couple *next_piece stands for the next_piece couple of coordinates.
-**	coord[current->x][5][0] = index of previous piece with the same pattern
+**	coord[current->x][5][0] = index of previous piece with the same pattern.
 */
 
 static int	ft_solve(char **map, char ***coord, t_couple *current, size_t size)
@@ -81,14 +83,10 @@ static int	ft_solve(char **map, char ***coord, t_couple *current, size_t size)
 	t_couple	pt;
 	t_couple	next_piece;
 
-	// pt.x = (size_t)coord[(size_t)coord[current->x][5][0]][6][0];
-	// printf("pt.x : %zu -- cur : %zu previous : %d\n", pt.x, current->x, coord[current->x][5][0]);
-	pt.x = 0;
 	if ((current->x) == (current->y))
 		return (1);
-	// pt.y = (size_t)coord[(size_t)coord[current->x][5][0]][6][1];
-	pt.y = 0;
-	// printf("pt.y : %zu -- cur : %zu previous : %d\n", pt.y, current->x, coord[current->x][5][0]);
+	pt.x = (size_t)coord[(size_t)coord[current->x][5][0]][6][0];
+	pt.y = (size_t)coord[(size_t)coord[current->x][5][0]][6][1];
 	while (pt.x < size)
 	{
 		while (pt.y < size)
@@ -137,13 +135,15 @@ static int	ft_tab_copy(char **src, char ***dst, size_t size)
 **	t_couple *current is a pointer pointing to a couple of size_t, where x
 **	stands for our current piece and y stands for the total number of pieces.
 **	Char **carpet is the map we try to solve.
-**	The function returns 0 in case of success and 1 if not.
+**	It cleans the coord positions when a solution is found.
+**	The function returns 0 in case of success and 1 otherwise.
 */
 
 int			ft_find_smallest_size(t_main *var, t_couple *current)
 {
 	size_t	size;
 	char	**carpet;
+	size_t	k;
 
 	size = 16;
 	while (size)
@@ -157,6 +157,13 @@ int			ft_find_smallest_size(t_main *var, t_couple *current)
 			return (0);
 		var->size = size;
 		size--;
+		k = 0;
+		while ((var->coord)[k])
+		{
+			(var->coord)[k][6][0] = 0;
+			(var->coord)[k][6][1] = 0;
+			k++;
+		}
 	}
 	return (0);
 }

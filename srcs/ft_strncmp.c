@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/07 19:00:51 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 16:40:34 by pgernez          ###   ########.fr       */
+/*   Created: 2016/12/24 11:30:21 by pgernez           #+#    #+#             */
+/*   Updated: 2017/08/06 17:52:37 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fillit.h"
+#include "fillit.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	i;
+	size_t			i;
+	unsigned char	*tmps1;
+	unsigned char	*tmps2;
 
 	i = 0;
-	if (dst < src)
-		ft_memcpy(dst, src, len);
-	else if (src < dst)
+	tmps1 = (unsigned char*)s1;
+	tmps2 = (unsigned char*)s2;
+	if (tmps1 == NULL && n == 0)
+		return (0);
+	while (i < (n - 1) && tmps1[i] != 0 && tmps2[i] != 0)
 	{
-		i = len;
-		while (i != 0)
-		{
-			((char*)dst)[i - 1] = ((char*)src)[i - 1];
-			i--;
-		}
+		if (tmps1[i] != tmps2[i])
+			break ;
+		else
+			i++;
 	}
-	return (dst);
+	if (n != 0)
+		return ((int)(tmps1[i] - tmps2[i]));
+	return (0);
 }

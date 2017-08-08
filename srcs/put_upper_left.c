@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 17:21:40 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/05 18:56:48 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/08 14:54:30 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 **	The 2 following static functions are quite explicit. They check whether if
-**	a piece can be placed in the upper left corner or not ; and do it
+**	a piece can be placed in the upper left corner or not; and do it
 **	accordingly.
 */
 
@@ -47,8 +47,7 @@ static int	ft_sub(char **coord, size_t col)
 
 /*
 **	ft_up_left is a function managing the end of the preprocessing part of the
-**	programme, e.g. putting a piece in the upper left corner if needed.
-**	It returns 0 if everything went well.
+**	programme, e.g. putting a piece in the upper left corner when needed.
 */
 
 int			ft_up_left(char ***coord)

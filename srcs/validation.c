@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 18:07:13 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 15:48:29 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/08 15:00:11 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_backslash_check(char ***tab)
 }
 
 /*
-**	ft_sharp_check returns 0 if we count 4 # in a piece or 1 if != 4
+**	ft_sharp_check returns 0 if we count 4 # in a piece or 1 if != 4.
 */
 
 static int	ft_sharp_check(char ***tab)
@@ -76,7 +76,7 @@ static int	ft_sharp_check(char ***tab)
 
 /*
 **	ft_dots_check returns 0 if the rest of the piece is filled with dots or 1
-**	if not.
+**	otherwise.
 */
 
 static int	ft_dots_check(char ***tab)
@@ -109,7 +109,7 @@ static int	ft_dots_check(char ***tab)
 }
 
 /*
-**	ft_pattern_check returns 0 if the pattern is correct or 1 if not.
+**	ft_pattern_check returns 0 if the pattern is correct or 1 otherwise.
 */
 
 static int	ft_pattern_check(char **tab)
@@ -146,7 +146,7 @@ static int	ft_pattern_check(char **tab)
 **	programme. The char*** stands for the table that stocks the pieces of the
 **	description file.
 **	The function returns the number of pieces of the description file if
-**	everything went well or an 'error' message if not.
+**	everything went well or an 'error' message otherwise.
 */
 
 size_t		ft_input_check(char ***tab)

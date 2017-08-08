@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/06 22:35:31 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 16:40:27 by pgernez          ###   ########.fr       */
+/*   Created: 2017/01/06 21:52:55 by pgernez           #+#    #+#             */
+/*   Updated: 2017/08/06 17:52:29 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fillit.h"
+#include "fillit.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	size_t	i;
+	char	*tmp;
+	size_t	k;
 
-	i = 0;
-	if (n == 0)
-		return (dst);
-	while (i <= (n - 1))
+	k = 0;
+	tmp = (char*)b;
+	if (b == NULL && len == 0)
+		return (NULL);
+	while (k < len)
 	{
-		((char*)dst)[i] = ((char*)src)[i];
-		i++;
+		tmp[k] = (unsigned char)c;
+		k++;
 	}
-	return (dst);
+	return (b);
 }

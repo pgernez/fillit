@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/16 18:53:30 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 16:40:41 by pgernez          ###   ########.fr       */
+/*   Created: 2017/01/07 19:00:51 by pgernez           #+#    #+#             */
+/*   Updated: 2017/08/06 17:52:25 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fillit.h"
+#include "fillit.h"
 
-void	ft_putstr(char *str)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	k;
+	size_t	i;
 
-	k = 0;
-	while (str[k] != 0)
+	i = 0;
+	if (dst < src)
+		ft_memcpy(dst, src, len);
+	else if (src < dst)
 	{
-		write(1, &str[k], 1);
-		k++;
+		i = len;
+		while (i != 0)
+		{
+			((char*)dst)[i - 1] = ((char*)src)[i - 1];
+			i--;
+		}
 	}
+	return (dst);
 }

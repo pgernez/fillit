@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/06 21:52:55 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 16:40:38 by pgernez          ###   ########.fr       */
+/*   Created: 2017/07/16 18:53:30 by pgernez           #+#    #+#             */
+/*   Updated: 2017/08/06 17:52:33 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fillit.h"
+#include "fillit.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	ft_putstr(char *str)
 {
-	char	*tmp;
 	size_t	k;
 
 	k = 0;
-	tmp = (char*)b;
-	if (b == NULL && len == 0)
-		return (NULL);
-	while (k < len)
+	while (str[k] != 0)
 	{
-		tmp[k] = (unsigned char)c;
+		write(1, &str[k], 1);
 		k++;
 	}
-	return (b);
 }

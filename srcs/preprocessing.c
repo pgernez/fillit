@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 14:24:48 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/06 16:36:06 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/08 14:53:39 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@
 **	line aims at stocking the letter, allowing us to use it
 **	later for the solving part. It returns 1 if the allocation fails and 0
 **	otherwise.
-**	coord[k][0] = coordinates of #0
-**	coord[k][1] = coordinates of #1
-**	coord[k][2] = coordinates of #2
-**	coord[k][3] = coordinates of #3
+**	coord[k][0 - 3] = coordinates of #
 **	coord[k][4][0] = letter
 **	coord[k][5][0] = index of the previous same piece
 **	coord[k][6] = position of the current piece (coord[k][6][0 / 1] = x / y)
@@ -55,8 +52,7 @@ static int	ft_create_coord(size_t nb_piece, char ****coord)
 }
 
 /*
-**	ft_get_pos stocks couples of coordinates in coord. It - sadly - takes 2
-**	size_t as parameters to stick to the Norm.
+**	ft_get_pos stocks couples of coordinates in coord.
 */
 
 static int	ft_get_pos(size_t j, size_t k, char ***tab, char ***coord)
@@ -132,7 +128,7 @@ static int	ft_connect(char ***coord)
 **	First it refers to ft_create_coord - allocating memory for couples of
 **	coordinates tables. Then it refers to ft_get_pos - getting coordinates
 **	positions and stocking it in coord -. The function then refers to
-**	put_upper_left.c. See you there ;).
+**	put_upper_left.c.
 **	The function returns coord.
 */
 
