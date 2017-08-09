@@ -9,7 +9,7 @@ More info about the project in the directory `subjects/` (both en and fr) of thi
 ## How do I test Fillit ?
 
 After cloning the repo, type the `make` command.
-You can now launch the programme by adding one of the files provided in `Test_files` or create a test file of our own.
+You can now launch the programme by adding one of the files provided in the directory `Test_files/` or create a test file of our own.
 
 For example :
 `./fillit Test_files/file_of_your_choice`
