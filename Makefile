@@ -6,7 +6,7 @@
 #    By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 15:37:56 by pgernez           #+#    #+#              #
-#    Updated: 2017/08/09 16:21:00 by pgernez          ###   ########.fr        #
+#    Updated: 2017/08/09 16:22:10 by pgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIBFT_PATH = srcs/libft/
 LIB_DIR = lib/
 LDFLAGS = -L$(LIB_DIR)
 LDLIBS = -lft
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -Iincludes/
 DIR = $(OBJ_DIR) $(LIB_DIR) $(OBJ_PATH)
 NAME = fillit
