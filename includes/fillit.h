@@ -6,7 +6,7 @@
 /*   By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/26 19:32:35 by pgernez           #+#    #+#             */
-/*   Updated: 2017/08/09 16:14:36 by pgernez          ###   ########.fr       */
+/*   Updated: 2017/08/09 16:41:24 by pgernez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <string.h>
+# include "libft.h"
 
 typedef struct		s_couple
 {

@@ -6,7 +6,7 @@
 #    By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/13 22:52:51 by pgernez           #+#    #+#              #
-#    Updated: 2017/08/09 16:09:48 by pgernez          ###   ########.fr        #
+#    Updated: 2017/08/09 16:44:07 by pgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,10 +97,10 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)%.c $(INC)libft.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 clean:
-	bin/rm -f $(OBJ)
+	rm -f $(OBJ)
 	@rmdir $(DIR) 2> /dev/null || true
 
 fclean: clean
-	bin/rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all

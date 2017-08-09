@@ -6,7 +6,7 @@
 #    By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 15:37:56 by pgernez           #+#    #+#              #
-#    Updated: 2017/08/09 16:22:10 by pgernez          ###   ########.fr        #
+#    Updated: 2017/08/09 16:38:17 by pgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_NAME = read_file.c\
 		 preprocessing.c\
 		 put_upper_left.c\
 		 solver.c\
-		 main.c\
+		 main.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
