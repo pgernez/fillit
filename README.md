@@ -12,4 +12,5 @@ After cloning the repo, type the `make` command.
 You can now launch the programme by adding one of the files provided in the `Test_files/` directory or create a test file of your own.
 
 For example :
-> ./fillit Test_files/file_of_your_choice
+
+`./fillit Test_files/file_of_your_choice`
