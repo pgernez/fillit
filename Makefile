@@ -6,51 +6,58 @@
 #    By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 15:37:56 by pgernez           #+#    #+#              #
-#    Updated: 2017/08/07 12:43:57 by pgernez          ###   ########.fr        #
+#    Updated: 2017/08/09 16:21:00 by pgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re
-
-NAME = fillit
-
-SRC_PATH = srcs
-
-SRC_NAME = ft_putstr.c\
-		 ft_memset.c\
-		 ft_memmove.c\
-		 ft_memcpy.c\
-		 ft_strncmp.c\
-		 read_file.c\
+OBJ_DIR = obj
+SRC_PATH = srcs/fillit
+OBJ_PATH = $(OBJ_DIR)/fillit
+SRC_NAME = read_file.c\
 		 validation.c\
 		 preprocessing.c\
 		 put_upper_left.c\
 		 solver.c\
 		 main.c\
-
+OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+CC = gcc
+LIBFT_PATH = srcs/libft/
+LIB_DIR = lib/
+LDFLAGS = -L$(LIB_DIR)
+LDLIBS = -lft
+CFLAGS = -Wall -Werror -Wextra
+CPPFLAGS = -Iincludes/
+DIR = $(OBJ_DIR) $(LIB_DIR) $(OBJ_PATH)
+NAME = fillit
 
-OBJ = $(SRC:.c=.o)
+.PHONY: all clean fclean re
+export LIB_DIR
+export OBJ_DIR
 
-CC = clang
+all: $(DIR) $(NAME)
 
-CFLAGS = -Werror -Wall -Wextra
+$(DIR):
+	mkdir -p $@
 
-CPPFLAGS = -Iinclude
+$(NAME) : $(DIR) $(OBJ)
+	make -C $(LIBFT_PATH)
+	$(CC) $(LDFLAGS) $(LDLIBS) $(OBJ) -o $@
 
-all: $(NAME)
-
-$(NAME): $(OBJ)
-	$(CC)  $(OBJ) -o $@
-
-%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 clean:
+	make -C $(LIBFT_PATH) $@
 	/bin/rm -f $(OBJ)
+	@rmdir $(OBJ_PATH) $(OBJ_DIR) 2> /dev/null || true
 
-fclean: clean
+fclean:
+	make -C $(LIBFT_PATH) $@
+	/bin/rm -f $(OBJ)
 	/bin/rm -f $(NAME)
+	@rmdir $(OBJ_PATH) $(LIB_DIR) $(OBJ_DIR) 2> /dev/null || true
 
 re: fclean all
 
