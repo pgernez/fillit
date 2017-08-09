@@ -6,7 +6,7 @@
 #    By: pgernez <pgernez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 15:37:56 by pgernez           #+#    #+#              #
-#    Updated: 2017/08/09 16:38:17 by pgernez          ###   ########.fr        #
+#    Updated: 2017/08/09 16:47:17 by pgernez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,13 +50,13 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 
 clean:
 	make -C $(LIBFT_PATH) $@
-	/bin/rm -f $(OBJ)
+	rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) $(OBJ_DIR) 2> /dev/null || true
 
 fclean:
 	make -C $(LIBFT_PATH) $@
-	/bin/rm -f $(OBJ)
-	/bin/rm -f $(NAME)
+	rm -f $(OBJ)
+	rm -f $(NAME)
 	@rmdir $(OBJ_PATH) $(LIB_DIR) $(OBJ_DIR) 2> /dev/null || true
 
 re: fclean all
